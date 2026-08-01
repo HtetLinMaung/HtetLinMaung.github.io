@@ -1,0 +1,21 @@
+---
+import { icons } from "../data/portfolio";
+
+const { name, className = "icon" } = Astro.props;
+const icon = icons[name];
+const definition =
+	typeof icon === "string"
+		? { viewBox: "0 0 24 24", body: icon, mode: "stroke" }
+		: { viewBox: icon.viewBox, body: icon.body, mode: icon.mode ?? "raw" };
+---
+
+<svg
+	class={className}
+	viewBox={definition.viewBox}
+	fill={definition.mode === "stroke" ? "none" : undefined}
+	stroke={definition.mode === "stroke" ? "currentColor" : undefined}
+	stroke-width={definition.mode === "stroke" ? "1.8" : undefined}
+	stroke-linecap={definition.mode === "stroke" ? "round" : undefined}
+	stroke-linejoin={definition.mode === "stroke" ? "round" : undefined}
+	set:html={definition.body}
+/>

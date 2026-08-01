@@ -1,0 +1,70 @@
+---
+import Icon from "./Icon.astro";
+import BankingProjectVisual from "./BankingProjectVisual.astro";
+import FpoProjectVisual from "./FpoProjectVisual.astro";
+import RustIngestProjectVisual from "./RustIngestProjectVisual.astro";
+import { withBase } from "../utils/paths";
+
+const { project, compact = false } = Astro.props;
+const links =
+	project.links ??
+	(project.href
+		? [{
+				label: project.linkLabel ?? "View Project",
+				href: project.href,
+				fullReload: project.fullReload,
+				regionLimited: project.regionLimited,
+			}]
+		: []);
+const isExternal = (href) => typeof href === "string" && /^https?:\/\//.test(href);
+const visibleTech = project.techLimit ? project.tech.slice(0, project.techLimit) : project.tech;
+const hiddenTechCount = project.tech.length - visibleTech.length;
+---
+
+<article class:list={["project-card", { compact }]}>
+	{
+		!compact && (
+			<div class={`project-visual ${project.variant}`}>
+				{project.variant === "ingest" && <RustIngestProjectVisual compact />}
+				{project.variant === "banking" && <BankingProjectVisual compact />}
+				{project.variant === "flight" && <FpoProjectVisual compact />}
+			</div>
+		)
+	}
+	<div class="project-body">
+		<span class="project-tag">{project.tag}</span>
+		<h3>{project.title}</h3>
+		<p>{project.copy}</p>
+		<div class="project-footer">
+			<ul class="tech-list">
+				{visibleTech.map((item) => <li>{item}</li>)}
+				{hiddenTechCount > 0 && <li class="tech-list-more">+{hiddenTechCount} more</li>}
+			</ul>
+			<div class="project-actions">
+				{
+					links.length > 0 ? (
+						<div class="project-links">
+							{links.map((link) => (
+								<a
+									class="text-link"
+									href={withBase(link.href)}
+									target={isExternal(link.href) ? "_blank" : undefined}
+									rel={isExternal(link.href) ? "noreferrer" : undefined}
+									data-astro-reload={link.fullReload ? "" : undefined}
+									data-region-limited={link.regionLimited ? "" : undefined}
+									data-region-href={link.regionLimited ? withBase(link.href) : undefined}
+									data-region-fallback={link.regionLimited ? withBase("/404") : undefined}
+								>
+									{link.label}
+									<Icon name="arrow" />
+								</a>
+							))}
+						</div>
+					) : project.tag !== "Closed Source" ? (
+						<span class="project-status">Closed Source</span>
+					) : null
+				}
+			</div>
+		</div>
+	</div>
+</article>

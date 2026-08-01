@@ -1,0 +1,47 @@
+---
+import Icon from "../components/Icon.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import { skillGroups } from "../data/portfolio";
+---
+
+<PortfolioLayout title="Htet Lin Maung | Skills" currentPath="/skills">
+	<section class="page-banner">
+		<div class="container">
+			<p class="eyebrow">Skills</p>
+			<h1>Technologies I use across frontend, backend, cloud, and delivery.</h1>
+			<p>
+				My stack is shaped by practical product work: building interfaces, designing APIs,
+				deploying infrastructure, and maintaining systems that stay clear and dependable.
+			</p>
+		</div>
+	</section>
+
+	<section class="section skills-shell">
+		<div class="container">
+			<div class="skills-panel">
+				<h2 class="skills-title">My Skills</h2>
+				<p class="skills-subtitle">Technologies and tools I work with</p>
+
+				<div class="skills-stack">
+					{
+						skillGroups.map((group) => (
+							<section class="skills-group">
+								<h3>{group.title}</h3>
+								<ul class="skill-pill-list">
+									{group.items.map((item) => (
+										<li class="skill-pill">
+											<span class="skill-pill-icon">
+												<Icon name={item.icon} className="skill-icon" />
+											</span>
+											<span>{item.label}</span>
+										</li>
+									))}
+								</ul>
+							</section>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>

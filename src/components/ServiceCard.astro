@@ -1,0 +1,13 @@
+---
+import Icon from "./Icon.astro";
+
+const { service } = Astro.props;
+---
+
+<article class="service-card">
+	<div class="service-icon">
+		<Icon name={service.icon} />
+	</div>
+	<h3>{service.title}</h3>
+	<p>{service.copy}</p>
+</article>

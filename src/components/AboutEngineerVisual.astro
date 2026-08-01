@@ -1,0 +1,43 @@
+<div class="about-engineer-visual" aria-hidden="true">
+	<img
+		src="/images/about-engineer-branded.webp"
+		alt=""
+		width="1005"
+		height="1565"
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+</div>
+
+<style>
+	.about-engineer-visual {
+		width: 100%;
+		aspect-ratio: 0.78;
+		overflow: hidden;
+		-webkit-mask-image:
+			linear-gradient(90deg, transparent 0%, #000 9%, #000 96%, transparent 100%),
+			linear-gradient(180deg, transparent 0%, #000 5%, #000 91%, transparent 100%);
+		-webkit-mask-composite: source-in;
+		mask-image:
+			linear-gradient(90deg, transparent 0%, #000 9%, #000 96%, transparent 100%),
+			linear-gradient(180deg, transparent 0%, #000 5%, #000 91%, transparent 100%);
+		mask-composite: intersect;
+	}
+
+	.about-engineer-visual img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 52%;
+		filter: saturate(0.9) contrast(0.98);
+	}
+
+	@media (max-width: 720px) {
+		.about-engineer-visual {
+			width: min(100%, 17.5rem);
+			margin-inline: auto;
+		}
+	}
+</style>

@@ -1,0 +1,459 @@
+---
+import Icon from "./Icon.astro";
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={["fpo-project-visual", { compact }]} aria-hidden="true">
+	<svg class="fpo-art-background" viewBox="0 0 760 430" preserveAspectRatio="none">
+		<path d="M-20 350C108 242 190 404 322 274C438 160 540 203 790 54"></path>
+		<path d="M-8 102C140 194 230 29 365 112C487 187 583 70 774 178"></path>
+		<circle cx="664" cy="86" r="58"></circle>
+		<circle cx="84" cy="342" r="38"></circle>
+	</svg>
+
+	<div class="fpo-orbit orbit-one"></div>
+	<div class="fpo-orbit orbit-two"></div>
+
+	<div class="fpo-optimization-board">
+		<div class="fpo-board-header">
+			<div>
+				<span>Flight Profile Optimizer</span>
+				<small>Trajectory comparison</small>
+			</div>
+			<strong><i></i> OPTIMAL</strong>
+		</div>
+
+		<div class="fpo-route-chart">
+			<svg viewBox="0 0 560 230" preserveAspectRatio="none">
+				<g class="fpo-chart-grid">
+					<path d="M34 42H530M34 94H530M34 146H530M34 198H530"></path>
+					<path d="M92 24V208M202 24V208M312 24V208M422 24V208"></path>
+				</g>
+				<path class="fpo-route fpo-route-fast" d="M28 186C126 129 182 55 276 76C361 96 410 43 532 35"></path>
+				<path class="fpo-route fpo-route-balanced" d="M28 186C118 160 193 96 278 110C372 126 435 73 532 61"></path>
+				<path class="fpo-route fpo-route-economy" d="M28 186C119 175 181 137 275 143C369 149 434 111 532 88"></path>
+				<circle class="fpo-route-point" cx="28" cy="186" r="5"></circle>
+				<circle class="fpo-route-point" cx="278" cy="110" r="5"></circle>
+				<circle class="fpo-route-point" cx="532" cy="61" r="5"></circle>
+			</svg>
+
+			<div class="fpo-plane-marker">
+				<Icon name="fpoAirline" />
+			</div>
+			<span class="fpo-chart-label label-origin">OFP</span>
+			<span class="fpo-chart-label label-profile">Fuel optimized</span>
+			<span class="fpo-chart-label label-destination">Destination</span>
+		</div>
+
+		<div class="fpo-board-footer">
+			<span><i class="route-fast"></i> Fastest</span>
+			<span><i class="route-balanced"></i> Balanced</span>
+			<span><i class="route-economy"></i> Lowest fuel</span>
+		</div>
+	</div>
+
+	<div class="fpo-metric-stack">
+		<div class="fpo-visual-metric fuel">
+			<span>Projected fuel</span>
+			<strong>-4.8%</strong>
+			<i><b></b></i>
+		</div>
+		<div class="fpo-visual-metric">
+			<span>Arrival</span>
+			<strong>On time</strong>
+			<small>Constraint met</small>
+		</div>
+		<div class="fpo-visual-metric altitude">
+			<span>Cruise profile</span>
+			<strong>FL350</strong>
+			<small>Optimized level</small>
+		</div>
+	</div>
+
+	<div class="fpo-visual-caption">
+		<Icon name="fpoAirline" />
+		<span>Fuel-aware trajectory planning</span>
+	</div>
+</div>
+
+<style>
+	.fpo-project-visual {
+		position: relative;
+		width: 100%;
+		min-height: 20rem;
+		container-type: inline-size;
+		overflow: hidden;
+		border: 1px solid #dce5f7;
+		border-radius: 1.35rem;
+		background:
+			radial-gradient(circle at 82% 18%, rgba(46, 102, 238, 0.14), transparent 0 24%),
+			linear-gradient(145deg, #fbfdff 0%, #edf4ff 100%);
+		box-shadow: 0 18px 42px rgba(15, 27, 61, 0.075);
+	}
+
+	.fpo-art-background {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.fpo-art-background path,
+	.fpo-art-background circle {
+		fill: none;
+		stroke: rgba(58, 100, 195, 0.12);
+		stroke-width: 1.2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.fpo-orbit {
+		position: absolute;
+		border: 1px solid rgba(47, 105, 255, 0.13);
+		border-radius: 50%;
+	}
+
+	.orbit-one {
+		right: -8%;
+		top: -28%;
+		width: 48%;
+		aspect-ratio: 1;
+	}
+
+	.orbit-two {
+		left: -10%;
+		bottom: -37%;
+		width: 40%;
+		aspect-ratio: 1;
+	}
+
+	.fpo-optimization-board {
+		position: absolute;
+		left: 5%;
+		top: 11%;
+		width: 72%;
+		height: 70%;
+		overflow: hidden;
+		border: 1px solid #d6e1f5;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.97);
+		box-shadow: 0 22px 46px rgba(29, 49, 90, 0.13);
+		transform: rotate(-1.2deg);
+	}
+
+	.fpo-board-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 20%;
+		padding: 0 1rem;
+		border-bottom: 1px solid #e1e8f6;
+		background: #f7f9fe;
+	}
+
+	.fpo-board-header > div {
+		display: grid;
+		gap: 0.1rem;
+	}
+
+	.fpo-board-header span,
+	.fpo-board-header strong,
+	.fpo-board-header small,
+	.fpo-chart-label,
+	.fpo-board-footer,
+	.fpo-visual-metric,
+	.fpo-visual-caption {
+		font-family: "Manrope", sans-serif;
+	}
+
+	.fpo-board-header span {
+		font-size: 0.66rem;
+		font-weight: 800;
+		color: #17294f;
+	}
+
+	.fpo-board-header small {
+		font-size: 0.48rem;
+		color: #7a879e;
+	}
+
+	.fpo-board-header strong {
+		display: flex;
+		align-items: center;
+		gap: 0.28rem;
+		padding: 0.28rem 0.45rem;
+		border-radius: 999px;
+		background: #eaf7ef;
+		font-size: 0.47rem;
+		letter-spacing: 0.08em;
+		color: #20794d;
+	}
+
+	.fpo-board-header strong i {
+		width: 0.34rem;
+		height: 0.34rem;
+		border-radius: 50%;
+		background: #27a766;
+	}
+
+	.fpo-route-chart {
+		position: relative;
+		height: 62%;
+		padding: 0.25rem 0.7rem 0;
+	}
+
+	.fpo-route-chart > svg {
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+	}
+
+	.fpo-chart-grid path {
+		fill: none;
+		stroke: #e6ebf5;
+		stroke-width: 1;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.fpo-route {
+		fill: none;
+		stroke-width: 2.1;
+		stroke-linecap: round;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.fpo-route-fast {
+		stroke: #e49944;
+		opacity: 0.58;
+	}
+
+	.fpo-route-balanced {
+		stroke: #2f69ff;
+		stroke-width: 3.1;
+	}
+
+	.fpo-route-economy {
+		stroke: #38a26b;
+		opacity: 0.68;
+	}
+
+	.fpo-route-point {
+		fill: #ffffff;
+		stroke: #2f69ff;
+		stroke-width: 2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.fpo-plane-marker {
+		position: absolute;
+		left: 48%;
+		top: 34%;
+		display: grid;
+		place-items: center;
+		width: 2rem;
+		height: 2rem;
+		border: 3px solid #fff;
+		border-radius: 50%;
+		background: #2f69ff;
+		box-shadow: 0 8px 18px rgba(47, 105, 255, 0.28);
+		color: #fff;
+		transform: rotate(-18deg);
+	}
+
+	.fpo-plane-marker :global(.icon) {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
+
+	.fpo-chart-label {
+		position: absolute;
+		padding: 0.16rem 0.3rem;
+		border-radius: 0.28rem;
+		background: rgba(255, 255, 255, 0.9);
+		font-size: 0.43rem;
+		font-weight: 800;
+		color: #5b6a87;
+	}
+
+	.label-origin {
+		left: 4%;
+		bottom: 5%;
+	}
+
+	.label-profile {
+		left: 50%;
+		top: 13%;
+		color: #2f69ff;
+	}
+
+	.label-destination {
+		right: 1%;
+		top: 9%;
+	}
+
+	.fpo-board-footer {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		height: 18%;
+		padding: 0 1rem;
+		border-top: 1px solid #e8edf7;
+		font-size: 0.44rem;
+		font-weight: 700;
+		color: #697792;
+	}
+
+	.fpo-board-footer span {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.fpo-board-footer i {
+		width: 0.75rem;
+		height: 2px;
+		border-radius: 999px;
+	}
+
+	.route-fast {
+		background: #e49944;
+	}
+
+	.route-balanced {
+		background: #2f69ff;
+	}
+
+	.route-economy {
+		background: #38a26b;
+	}
+
+	.fpo-metric-stack {
+		position: absolute;
+		right: 4%;
+		top: 17%;
+		display: grid;
+		gap: 0.58rem;
+		width: 26%;
+	}
+
+	.fpo-visual-metric {
+		display: grid;
+		gap: 0.08rem;
+		padding: 0.62rem 0.68rem;
+		border: 1px solid #dbe4f5;
+		border-radius: 0.75rem;
+		background: rgba(255, 255, 255, 0.97);
+		box-shadow: 0 10px 22px rgba(23, 42, 80, 0.1);
+	}
+
+	.fpo-visual-metric span,
+	.fpo-visual-metric small {
+		font-size: 0.43rem;
+		color: #76839c;
+	}
+
+	.fpo-visual-metric strong {
+		font-size: 0.8rem;
+		color: #17294f;
+	}
+
+	.fpo-visual-metric.fuel strong {
+		color: #218455;
+	}
+
+	.fpo-visual-metric > i {
+		height: 0.22rem;
+		margin-top: 0.24rem;
+		overflow: hidden;
+		border-radius: 99px;
+		background: #e5ebf4;
+	}
+
+	.fpo-visual-metric > i b {
+		display: block;
+		width: 72%;
+		height: 100%;
+		border-radius: inherit;
+		background: linear-gradient(90deg, #38a26b, #6bc18f);
+	}
+
+	.fpo-visual-caption {
+		position: absolute;
+		left: 7%;
+		bottom: 4%;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.56rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #566b91;
+	}
+
+	.fpo-visual-caption :global(.icon) {
+		width: 1.1rem;
+		height: 1.1rem;
+		color: #2f69ff;
+	}
+
+	.fpo-project-visual.compact {
+		min-height: 100%;
+		height: 100%;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.compact .fpo-optimization-board {
+		left: 4%;
+		top: 9%;
+		width: 75%;
+		height: 73%;
+	}
+
+	.compact .fpo-metric-stack {
+		right: 3%;
+		top: 16%;
+		width: 28%;
+	}
+
+	.compact .fpo-visual-metric {
+		padding: 0.52rem 0.55rem;
+	}
+
+	.compact .fpo-visual-caption {
+		left: 5%;
+		bottom: 3%;
+	}
+
+	@container (max-width: 430px) {
+		.fpo-board-header {
+			padding: 0 0.65rem;
+		}
+
+		.fpo-board-header span {
+			font-size: 0.54rem;
+		}
+
+		.fpo-board-header small,
+		.fpo-board-footer,
+		.fpo-chart-label {
+			font-size: 0.38rem;
+		}
+
+		.fpo-board-footer {
+			gap: 0.42rem;
+			padding: 0 0.65rem;
+		}
+
+		.fpo-visual-metric strong {
+			font-size: 0.68rem;
+		}
+
+		.fpo-plane-marker {
+			width: 1.65rem;
+			height: 1.65rem;
+		}
+	}
+</style>

@@ -1,0 +1,49 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import PackageCollection from "../components/PackageCollection.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import { archiveProjects, featuredProjects, npmPackageGroups } from "../data/portfolio";
+---
+
+<PortfolioLayout title="Htet Lin Maung | Projects" currentPath="/projects">
+	<section class="page-banner">
+		<div class="container">
+			<p class="eyebrow">Projects</p>
+			<h1>Projects I have built and helped deliver.</h1>
+			<p>
+				My work includes banking and aviation systems, cloud services, open-source tools, and
+				smaller apps. I have included more details about my role and how each project was built.
+			</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-head">
+				<p class="eyebrow">Featured Work</p>
+				<h2 class="section-title">Selected systems and applications</h2>
+			</div>
+			<div class="projects-grid">
+				{featuredProjects.map((project) => <ProjectCard project={project} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section project-archive-section">
+		<div class="container">
+			<div class="section-head">
+				<p class="eyebrow">Earlier Work</p>
+				<h2 class="section-title">Applications, services, and developer tools</h2>
+			</div>
+			<div class="projects-grid project-archive-grid">
+				{archiveProjects.map((project) => <ProjectCard project={project} compact />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section package-section">
+		<div class="container">
+			<PackageCollection groups={npmPackageGroups} />
+		</div>
+	</section>
+</PortfolioLayout>

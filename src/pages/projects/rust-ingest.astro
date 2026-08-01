@@ -1,0 +1,273 @@
+---
+import Icon from "../../components/Icon.astro";
+import RustIngestProjectVisual from "../../components/RustIngestProjectVisual.astro";
+import PortfolioLayout from "../../layouts/PortfolioLayout.astro";
+import { featuredProjects } from "../../data/portfolio";
+import { withBase } from "../../utils/paths";
+
+const project = featuredProjects.find((item) => item.href === "/projects/rust-ingest");
+---
+
+<PortfolioLayout title="Htet Lin Maung | Rust Payment Event Pipeline" currentPath="/projects">
+	<section class="page-banner">
+		<div class="container project-detail-hero">
+			<div class="project-detail-copy">
+				<p class="eyebrow">Project Detail</p>
+				<h1>Rust Payment Event Pipeline</h1>
+				<p class="project-repository-name">
+					<Icon name="github" />
+					<span>Open-source repository</span>
+					<code>rust-ingest</code>
+				</p>
+				<p>
+					A payment notification pipeline built with Rust on AWS. It handles high volumes of
+					incoming payment events without dropping data or running up a large cloud bill.
+				</p>
+				<p class="project-detail-note">
+					This is a prototype. It is not connected to any real payment provider or production
+					system.
+				</p>
+
+				<ul class="chip-list project-detail-stack">
+					<li>Rust</li>
+					<li>Amazon API Gateway</li>
+					<li>AWS Lambda</li>
+					<li>Amazon SQS</li>
+					<li>DynamoDB</li>
+					<li>AWS CDK</li>
+				</ul>
+
+				<div class="project-detail-actions">
+					<a class="button primary" href={project?.sourceHref} target="_blank" rel="noreferrer">
+						View Source
+						<Icon name="github" />
+					</a>
+					<a class="button secondary" href={withBase("/projects")}>
+						Back to Projects
+						<Icon name="arrow" />
+					</a>
+				</div>
+			</div>
+
+			<div class="project-detail-visual">
+				<RustIngestProjectVisual />
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="project-detail-story">
+				<div class="project-detail-story-intro">
+					<p class="eyebrow">Overview</p>
+					<h2 class="section-title">A queue-first design for reliability and cost control.</h2>
+					<p>
+						The system keeps the public request path fast while durable background processing
+						handles persistence.
+					</p>
+				</div>
+
+				<div class="project-detail-story-copy">
+					<article class="project-detail-narrative">
+						<span>01</span>
+						<h3>The problem</h3>
+					<p>
+						When a customer pays online, the payment provider sends a notification to the
+						merchant&apos;s server. That works fine when traffic is low. Now imagine Black Friday:
+						thousands of payments happening every second.
+					</p>
+					<p>
+						Events get dropped if the server is busy saving to a database when the next
+						notification arrives, and it gets expensive when teams keep large servers running
+						around the clock just to survive traffic spikes.
+					</p>
+					</article>
+
+					<article class="project-detail-narrative">
+						<span>02</span>
+						<h3>The approach</h3>
+						<p>
+							The pipeline is split into two parts connected by a queue. The first part accepts
+							incoming notifications as fast as possible and puts them on the queue. It never
+							touches the database directly, so a slow database never slows it down.
+						</p>
+						<p>
+							The second part reads from the queue and saves each notification to the database.
+							If one fails, only that one is retried. If a message keeps failing, it can move to a
+							dead-letter queue instead of blocking the main queue.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section project-detail-architecture-section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Architecture</p>
+				<h2 class="section-title">Receiver, queue, processor, storage.</h2>
+			</div>
+
+			<div class="project-detail-architecture">
+				<div class="project-detail-architecture-card">
+					<picture>
+						<source
+							media="(prefers-reduced-motion: reduce)"
+							srcset={withBase("/projects/rust-ingest-architecture-poster.png")}
+						/>
+						<img
+							class="project-detail-architecture-image"
+							src={withBase("/projects/rust-ingest-architecture.gif")}
+							width="1100"
+							height="600"
+							loading="lazy"
+							decoding="async"
+							alt="Animated rust-ingest architecture showing payment events flowing through API Gateway, Rust Lambda functions, SQS, DynamoDB, and a dead-letter queue"
+						/>
+					</picture>
+				</div>
+
+				<div class="project-detail-architecture-notes">
+					<article>
+						<span>01</span>
+						<h3>Fast acceptance path</h3>
+						<p>
+							The first part accepts incoming notifications as fast as possible and puts them on
+							the queue. It just acknowledges the request and moves on.
+						</p>
+					</article>
+
+					<article>
+						<span>02</span>
+						<h3>Retry-safe processing</h3>
+						<p>
+							The queue holds notifications safely. Even if thousands arrive at once, nothing is
+							lost. Failed messages retry independently, and repeated failures can be inspected
+							separately instead of getting stuck in an infinite retry loop.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Engineering Focus</p>
+				<h2 class="section-title">Designed for bursts, failure, and simple operations.</h2>
+			</div>
+
+			<div class="project-detail-principles">
+				<article>
+					<h3>Rust on Lambda</h3>
+					<p>
+						Low memory usage and fast startup make Rust a good fit for Lambda when you want a
+						serverless ingest path to stay efficient under bursty workloads.
+					</p>
+				</article>
+
+				<article>
+					<h3>SQS decoupling</h3>
+					<p>
+						Amazon SQS decouples receiving from processing. Messages are held safely during
+						traffic spikes and retried automatically on failure.
+					</p>
+				</article>
+
+				<article>
+					<h3>DynamoDB storage</h3>
+					<p>
+						Serverless NoSQL with pay-per-request billing and built-in TTL support makes
+						DynamoDB a practical fit for expiring old payment records without managing a cluster.
+					</p>
+				</article>
+			</div>
+
+			<div class="project-detail-build">
+				<div class="project-detail-build-heading">
+					<p class="eyebrow">Code Structure</p>
+					<h2>Clear boundaries from request to infrastructure.</h2>
+				</div>
+
+				<div class="project-detail-build-list">
+					<article>
+						<span>01</span>
+						<h3>Receiver path</h3>
+						<p>
+							<code>bin/receiver.rs</code> is a thin HTTP adapter while
+							<code>services/enqueue.rs</code> contains the receiver business logic that
+							publishes events.
+						</p>
+					</article>
+
+					<article>
+						<span>02</span>
+						<h3>Processor path</h3>
+						<p>
+							<code>bin/processor.rs</code> is a thin SQS adapter while
+							<code>services/persist.rs</code> owns the processor business logic for saving events.
+						</p>
+					</article>
+
+					<article>
+						<span>03</span>
+						<h3>AWS wrappers</h3>
+						<p>
+							<code>aws/queue.rs</code> and <code>aws/dynamodb.rs</code> keep service integration
+							separate from domain logic for easier testing and clearer boundaries.
+						</p>
+					</article>
+
+					<article>
+						<span>04</span>
+						<h3>Infrastructure as code</h3>
+						<p>
+							The infrastructure is defined in TypeScript CDK, making the queues, Lambdas, API
+							Gateway, and DynamoDB setup easier to review and test than raw CloudFormation.
+						</p>
+					</article>
+				</div>
+			</div>
+
+			<div class="project-detail-closing">
+				<div>
+					<p class="eyebrow">Explore the implementation</p>
+					<h2>Read the code, infrastructure, and deployment notes.</h2>
+				</div>
+				<a class="button primary" href={project?.sourceHref} target="_blank" rel="noreferrer">
+					Open GitHub
+					<Icon name="github" />
+				</a>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>
+
+<style>
+	.project-repository-name {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		margin: 0.7rem 0 0;
+		font-family: "Manrope", sans-serif;
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: #6a7893;
+	}
+
+	.project-repository-name :global(.icon) {
+		width: 1rem;
+		height: 1rem;
+		color: #24292f;
+	}
+
+	.project-repository-name code {
+		padding: 0.18rem 0.38rem;
+		border-radius: 0.35rem;
+		background: #edf3ff;
+		font-size: 0.7rem;
+		color: #2c5ecc;
+	}
+</style>

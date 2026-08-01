@@ -1,0 +1,22 @@
+html[data-theme="white"] body {
+	background: #e8edf5;
+}
+
+html[data-theme="white"] .page {
+	background: #ffffff;
+}
+
+html[data-theme="white"] .identity-rail,
+html[data-theme="white"] .page-two-header::before {
+	background: #f4f7fd;
+}
+
+html[data-theme="white"] .resume-main,
+html[data-theme="white"] .page-two-header,
+html[data-theme="white"] .page-two-main {
+	background: #ffffff;
+}
+
+html[data-theme="white"] .page-two-footer {
+	background: #f4f7fd;
+}

@@ -1,17 +1,147 @@
 ---
-
+import Icon from "../components/Icon.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import StatsGrid from "../components/StatsGrid.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import { aboutDetails, featuredProjects, homeHighlights, services, stats } from "../data/portfolio";
+import { withBase } from "../utils/paths";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<PortfolioLayout title="Htet Lin Maung | Home" currentPath="/">
+	<section class="hero">
+		<div class="container hero-grid">
+			<div class="hero-copy">
+				<p class="hero-greeting"><span class="wave">👋</span> Hello, I'm</p>
+				<h1>Htet Lin Maung</h1>
+				<p class="hero-role">Software Engineer</p>
+				<p>
+					I build scalable web applications and cloud solutions that solve real world problems
+					and deliver great user experiences.
+				</p>
+
+				<div class="hero-actions">
+					<a class="button primary" href={withBase("/projects")}>
+						View My Work
+						<Icon name="arrow" />
+					</a>
+					<a class="button secondary" href={withBase("/contact")}>
+						Contact Me
+						<Icon name="mail" />
+					</a>
+				</div>
+
+				<div class="socials" aria-label="Social links">
+					<a
+						class="social-github"
+						href="https://github.com/HtetLinMaung"
+						aria-label="GitHub"
+					>
+						<Icon name="github" />
+					</a>
+					<a
+						class="social-linkedin"
+						href="https://www.linkedin.com/in/htet-lin-maung-5b544a269?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+						aria-label="LinkedIn"
+					>
+						<Icon name="linkedin" />
+					</a>
+				</div>
+			</div>
+
+			<div class="hero-visual">
+				<div class="hero-frame">
+					<img src={withBase("/hero-abstract.svg")} alt="Abstract portfolio hero illustration" />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section home-highlights-section" aria-labelledby="home-highlights-title">
+		<div class="container home-highlights-layout">
+			<header class="home-highlights-intro">
+				<p class="eyebrow">Core Strengths</p>
+				<h2 class="section-title" id="home-highlights-title">The way I build.</h2>
+				<p>
+					A practical approach shaped by production work across web, mobile, and cloud
+					systems.
+				</p>
+			</header>
+
+			<div class="home-highlights">
+				{
+					homeHighlights.map((item) => (
+						<article class="home-highlight">
+							<div class="home-highlight-icon">
+								<Icon name={item.icon} />
+							</div>
+							<div class="home-highlight-copy">
+								<h3>{item.title}</h3>
+								<p>{item.copy}</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="section" aria-labelledby="what-i-do">
+		<div class="container">
+			<div class="section-head">
+				<p class="eyebrow">What I Do</p>
+				<h2 class="section-title" id="what-i-do">
+					Building solutions with clean code and modern technologies.
+				</h2>
+			</div>
+
+			<div class="services-grid">
+				{services.map((service) => <ServiceCard service={service} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section" aria-labelledby="featured-projects">
+		<div class="container">
+			<div class="section-head">
+				<p class="eyebrow">Featured Projects</p>
+				<h2 class="section-title" id="featured-projects">Some things I've built</h2>
+			</div>
+
+			<div class="projects-grid">
+				{featuredProjects.map((project) => <ProjectCard project={project} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section" aria-labelledby="about-title">
+		<div class="container about-grid">
+			<div class="about-copy">
+				<p class="eyebrow">About Me</p>
+				<h2 class="section-title" id="about-title">Passionate about creating impactful products</h2>
+				<p class="page-copy" style="margin-bottom: 1.5rem;">
+					I’m a software engineer with experience in full stack development, cloud architecture,
+					and distributed systems. I enjoy turning complex problems into simple, beautiful and
+					intuitive solutions.
+				</p>
+				<a class="button secondary" href={withBase("/about")}>
+					<Icon name="user" />
+					More About Me
+				</a>
+			</div>
+
+			<div class="about-details">
+				{
+					aboutDetails.map((detail) => (
+						<div class="detail-item">
+							<div class="icon-wrap"><Icon name={detail.icon} /></div>
+							<p>{detail.text}</p>
+						</div>
+					))
+				}
+			</div>
+
+			<StatsGrid stats={stats} />
+		</div>
+	</section>
+</PortfolioLayout>

@@ -1,0 +1,253 @@
+---
+import Icon from "../../components/Icon.astro";
+import FpoProjectVisual from "../../components/FpoProjectVisual.astro";
+import PortfolioLayout from "../../layouts/PortfolioLayout.astro";
+import { flightProfileOptimizerTech } from "../../data/portfolio";
+import { withBase } from "../../utils/paths";
+---
+
+<PortfolioLayout
+	title="Htet Lin Maung | Flight Profile Optimizer"
+	currentPath="/projects"
+	regionGuard
+>
+	<section class="page-banner">
+		<div class="container project-detail-hero">
+			<div class="project-detail-copy">
+				<p class="eyebrow">Project Detail</p>
+				<h1>Flight Profile Optimizer</h1>
+				<p>
+					An event-driven aerospace platform that transforms operational flight plans, aircraft
+					reports, and weather data into optimized trajectory options that help airlines reduce
+					fuel burn while meeting flight-time and operational constraints.
+				</p>
+
+				<div class="banking-confidential-note">
+					<Icon name="bankLock" />
+					<p>
+						This is a company project. Source code, production data, and the live system cannot be
+						shared publicly.
+					</p>
+				</div>
+
+				<ul class="chip-list project-detail-stack">
+					{flightProfileOptimizerTech.map((technology) => <li>{technology}</li>)}
+				</ul>
+
+				<div class="project-detail-actions">
+					<a class="button primary" href={withBase("/projects")}>
+						Back to Projects
+						<Icon name="arrow" />
+					</a>
+				</div>
+			</div>
+
+			<FpoProjectVisual />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="project-detail-story">
+				<div class="project-detail-story-intro">
+					<p class="eyebrow">Overview</p>
+					<h2 class="section-title">Operational flight data becomes fuel-efficient trajectory guidance.</h2>
+					<p>
+						The platform combines operational flight plans, loadsheets, aircraft position reports,
+						ACARS messages, weather, and aircraft constraints to calculate alternative
+						trajectories. Airlines can prioritize lower fuel consumption while remaining on time,
+						higher speed, or reduced flight time with an understood fuel tradeoff. Pilots receive
+						the resulting guidance through the iPad client and select the appropriate profile for
+						the flight.
+					</p>
+				</div>
+
+				<div class="project-detail-story-copy">
+					<article class="project-detail-narrative">
+						<span>01</span>
+						<h3>Airline data intake and pilot inputs</h3>
+						<p>
+							Airline systems send operational flight plans, loadsheets, ACARS messages, and
+							position reports through a dedicated Ingestion API Gateway and Lambda function.
+							A separate authenticated App API returns calculated trajectory options to pilots.
+							When a pilot changes an input such as aircraft weight or a flight-level constraint,
+							the App API starts the shared trajectory-calculation state machine to generate
+							updated fuel and time profiles. The current iPad client uses React Native, while
+							the earlier client was built with Xamarin.
+						</p>
+					</article>
+					<article class="project-detail-narrative">
+						<span>02</span>
+						<h3>Separate processing paths</h3>
+						<p>
+							Amazon S3 Object Created events invoke a dispatcher Lambda function. The dispatcher
+							starts the OFP-processing state machine for OFP files and the ACARS-processing state
+							machine for ACARS messages and position reports. Each workflow coordinates multiple
+							AWS Lambda functions before starting the shared trajectory-calculation workflow.
+						</p>
+					</article>
+					<article class="project-detail-narrative">
+						<span>03</span>
+						<h3>Purpose-built flight storage</h3>
+						<p>
+							Processed flight-plan and avionics records are stored in Amazon DynamoDB. Large
+							flight-data attachments are kept in a separate Amazon S3 bucket instead of being
+							embedded in DynamoDB items. Every state machine can read and write both stores.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section project-detail-architecture-section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Architecture</p>
+				<h2 class="section-title">Event-driven flight processing with a shared calculation workflow.</h2>
+				<p class="project-detail-architecture-context">
+					The platform processes airline data to calculate fuel-efficient trajectories, enriched
+					with weather and synchronized RSA reference data.
+				</p>
+				<p class="project-detail-architecture-context">
+					This is my simplified, enhanced representation, not the company’s exact architecture. The
+					real platform is too complex for a single diagram.
+				</p>
+			</div>
+
+			<div class="project-detail-architecture">
+				<div class="project-detail-architecture-card fpo-architecture-card">
+					<a
+						class="fpo-architecture-image-link"
+						href={withBase("/projects/flight-profile-optimizer-architecture.png?v=20260728-16")}
+						target="_blank"
+						rel="noopener"
+						aria-label="Open the Flight Profile Optimizer architecture diagram at full size"
+					>
+						<img
+							class="project-detail-architecture-image fpo-architecture-image"
+                src={withBase("/projects/flight-profile-optimizer-architecture.png?v=20260728-16")}
+							width="2464"
+							height="1856"
+							loading="lazy"
+							decoding="async"
+							alt="Flight Profile Optimizer architecture showing separate pilot and airline APIs, S3 event dispatch, OFP and ACARS processing workflows, trajectory calculation, flight-data storage, weather enrichment, and scheduled RSA synchronization"
+						/>
+					</a>
+				</div>
+
+				<div class="project-detail-architecture-notes fpo-architecture-notes">
+					<article>
+						<span>01</span>
+						<h3>Reliable event routing</h3>
+						<p>
+							Amazon S3 Object Created notifications invoke a dispatcher Lambda function. The
+							dispatcher identifies the uploaded file type and starts the correct AWS Step
+							Functions state machine.
+						</p>
+					</article>
+					<article>
+						<span>02</span>
+						<h3>Workflow orchestration</h3>
+						<p>
+							The processing state machines coordinate focused Lambda functions for parsing,
+							normalization, enrichment, and preparation. Both processing paths converge on the
+							same calculation state machine to generate trajectory options optimized around fuel,
+							time, speed, and operational constraints. The App API can also start this state
+							machine when a pilot changes aircraft weight, flight-level constraints, or other
+							calculation inputs. The RSA synchronization Lambda starts it after refreshing the
+							reference data used by the calculation.
+						</p>
+					</article>
+					<article>
+						<span>03</span>
+						<h3>Large flight-data strategy</h3>
+						<p>
+							DynamoDB contains queryable processed records, while a separate S3 attachment bucket
+							contains large flight objects. Workflows keep references between the two storage
+							layers instead of placing large attachments inside DynamoDB. The App API reads from
+							both stores when it returns suggested trajectories and their related flight data to
+							the pilot application.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Engineering Focus</p>
+				<h2 class="section-title">Reliable flight-data processing for fuel-aware decisions.</h2>
+			</div>
+
+			<div class="project-detail-principles">
+				<article>
+					<h3>Fuel-aware optimization</h3>
+					<p>
+						The calculation workflow evaluates operational constraints and generates trajectory
+						options that balance fuel consumption, flight time, and speed.
+					</p>
+				</article>
+				<article>
+					<h3>Event-driven processing</h3>
+					<p>
+						S3 events and a dispatcher Lambda route each airline data type into focused Step
+						Functions workflows before running the shared trajectory calculation.
+					</p>
+				</article>
+				<article>
+					<h3>Purpose-built storage</h3>
+					<p>
+						DynamoDB stores queryable flight records, while Amazon S3 holds larger flight objects
+						used by the processing and calculation workflows.
+					</p>
+				</article>
+			</div>
+
+			<div class="project-detail-closing">
+				<div>
+					<p class="eyebrow">Company Project</p>
+					<h2>Architecture overview only. Source code and production access remain private.</h2>
+				</div>
+				<a class="button secondary" href={withBase("/projects")}>
+					Back to Projects
+					<Icon name="arrow" />
+				</a>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>
+
+<style>
+	.fpo-architecture-notes {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.fpo-architecture-card {
+		overflow: hidden;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.fpo-architecture-image-link {
+		display: block;
+	}
+
+	.fpo-architecture-image {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid #dce5f6;
+		border-radius: 1.35rem;
+	}
+
+	@media (max-width: 720px) {
+		.fpo-architecture-notes {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

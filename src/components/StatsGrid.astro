@@ -1,0 +1,92 @@
+---
+const { stats, className = "" } = Astro.props;
+---
+
+<div class:list={["stats-grid", className]} data-stats-grid>
+	{
+		stats.map((stat, index) => {
+			const match = stat.value.match(/^(\d+)(.*)$/);
+
+			return (
+				<article class="stat-card">
+					<strong
+						data-stat-value
+						data-count-target={match?.[1]}
+						data-count-suffix={match?.[2] ?? ""}
+						data-stat-index={index}
+					>
+						{stat.value}
+					</strong>
+					<span>{stat.label}</span>
+				</article>
+			);
+		})
+	}
+</div>
+
+<script>
+	const initStatsCounters = () => {
+		document.querySelectorAll("[data-stats-grid]").forEach((grid) => {
+			if (!(grid instanceof HTMLElement) || grid.dataset.counterBound === "true") return;
+			grid.dataset.counterBound = "true";
+
+			const values = Array.from(grid.querySelectorAll("[data-stat-value]"));
+			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+			if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+			values.forEach((value) => {
+				if (!(value instanceof HTMLElement)) return;
+				const target = Number(value.dataset.countTarget);
+				const suffix = value.dataset.countSuffix ?? "";
+				value.classList.add("stat-pending");
+
+				if (Number.isFinite(target)) {
+					value.textContent = `0${suffix}`;
+				}
+			});
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (!entries.some((entry) => entry.isIntersecting)) return;
+					observer.disconnect();
+
+					values.forEach((value, index) => {
+						if (!(value instanceof HTMLElement)) return;
+						const target = Number(value.dataset.countTarget);
+						const suffix = value.dataset.countSuffix ?? "";
+						const delay = index * 90;
+
+						window.setTimeout(() => {
+							value.classList.remove("stat-pending");
+							value.classList.add("stat-active");
+
+							if (!Number.isFinite(target)) return;
+
+							const start = performance.now();
+							const duration = 1100;
+
+							const update = (now) => {
+								const progress = Math.min((now - start) / duration, 1);
+								const eased = 1 - Math.pow(1 - progress, 3);
+								value.textContent = `${Math.round(target * eased)}${suffix}`;
+
+								if (progress < 1) {
+									requestAnimationFrame(update);
+								}
+							};
+
+							requestAnimationFrame(update);
+						}, delay);
+					});
+				},
+				{ threshold: 0.35 }
+			);
+
+			observer.observe(grid);
+		});
+	};
+
+	initStatsCounters();
+	document.addEventListener("astro:page-load", initStatsCounters);
+</script>

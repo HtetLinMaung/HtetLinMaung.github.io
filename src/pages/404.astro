@@ -1,0 +1,260 @@
+---
+import Icon from "../components/Icon.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import { withBase } from "../utils/paths";
+---
+
+<PortfolioLayout title="Page Not Found | Htet Lin Maung" currentPath="/404">
+	<section class="not-found" aria-labelledby="not-found-title">
+		<div class="container not-found-grid">
+			<div class="not-found-copy">
+				<p class="eyebrow">404 / Page Not Found</p>
+				<h1 id="not-found-title">This route ends here.</h1>
+				<p class="not-found-message">
+					The page may have moved, or the address might be incomplete. Head back home or
+					take a look at my recent work.
+				</p>
+
+				<div class="not-found-actions">
+					<a class="button primary not-found-primary" href={withBase("/")}>
+						Back to Home
+						<Icon name="arrow" />
+					</a>
+					<a class="button secondary" href={withBase("/projects")}>View Projects</a>
+				</div>
+			</div>
+
+			<div class="not-found-visual" aria-hidden="true">
+				<span class="not-found-number">404</span>
+				<svg viewBox="0 0 520 300" role="presentation">
+					<path class="route-shadow" d="M34 222C112 222 103 92 193 92s75 121 157 121c51 0 61-48 136-48" />
+					<path class="route" d="M34 222C112 222 103 92 193 92s75 121 157 121" />
+					<path class="route-missing" d="M382 205c25-13 46-40 104-40" />
+					<circle class="route-start" cx="34" cy="222" r="11" />
+					<circle class="route-node" cx="193" cy="92" r="9" />
+					<circle class="route-stop" cx="350" cy="213" r="14" />
+					<path class="route-cross" d="m344 207 12 12m0-12-12 12" />
+					<circle class="route-destination" cx="486" cy="165" r="8" />
+				</svg>
+				<span class="route-label route-label-start">portfolio.dev</span>
+				<span class="route-label route-label-stop">route missing</span>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>
+
+<style>
+	.not-found {
+		position: relative;
+		display: grid;
+		min-height: min(43rem, calc(100vh - 5.5rem));
+		align-items: center;
+		overflow: hidden;
+		padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+		background:
+			radial-gradient(circle at 82% 42%, rgba(47, 105, 255, 0.11), transparent 23rem),
+			linear-gradient(180deg, #f8faff 0%, #f7f9ff 100%);
+	}
+
+	.not-found::before {
+		position: absolute;
+		top: 15%;
+		right: 8%;
+		width: 20rem;
+		height: 20rem;
+		border: 1px solid rgba(47, 105, 255, 0.09);
+		border-radius: 50%;
+		content: "";
+	}
+
+	.not-found-grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 0.82fr) minmax(25rem, 1.18fr);
+		gap: clamp(2.5rem, 6vw, 6rem);
+		align-items: center;
+	}
+
+	.not-found-copy {
+		position: relative;
+		z-index: 1;
+	}
+
+	.not-found-copy h1 {
+		max-width: 36rem;
+		margin: 0;
+		font-family: "Manrope", sans-serif;
+		font-size: clamp(3rem, 5.4vw, 5.2rem);
+		font-weight: 800;
+		line-height: 1.02;
+		letter-spacing: -0.065em;
+		color: var(--text);
+	}
+
+	.not-found-message {
+		max-width: 34rem;
+		margin: 1.4rem 0 0;
+		font-size: 1rem;
+		line-height: 1.8;
+		color: var(--muted);
+	}
+
+	.not-found-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+		margin-top: 2rem;
+	}
+
+	.not-found-primary {
+		background: var(--accent) !important;
+		box-shadow: 0 12px 28px rgba(44, 99, 241, 0.2);
+	}
+
+	.not-found-visual {
+		position: relative;
+		min-height: 24rem;
+	}
+
+	.not-found-number {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		font-family: "Manrope", sans-serif;
+		font-size: clamp(10rem, 19vw, 17rem);
+		font-weight: 800;
+		line-height: 0.75;
+		letter-spacing: -0.11em;
+		color: rgba(44, 99, 241, 0.075);
+		transform: translate(-52%, -51%);
+		white-space: nowrap;
+	}
+
+	.not-found-visual svg {
+		position: absolute;
+		inset: 2rem 0 auto;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+
+	.route-shadow,
+	.route,
+	.route-missing {
+		fill: none;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.route-shadow {
+		stroke: rgba(15, 27, 61, 0.09);
+		stroke-width: 16;
+	}
+
+	.route {
+		stroke: var(--accent);
+		stroke-width: 5;
+	}
+
+	.route-missing {
+		stroke: #9aabc9;
+		stroke-width: 4;
+		stroke-dasharray: 3 13;
+	}
+
+	.route-start,
+	.route-node {
+		fill: #fff;
+		stroke: var(--accent);
+		stroke-width: 5;
+	}
+
+	.route-stop {
+		fill: #fff;
+		stroke: #0f1b3d;
+		stroke-width: 4;
+	}
+
+	.route-cross {
+		fill: none;
+		stroke: #0f1b3d;
+		stroke-width: 3;
+		stroke-linecap: round;
+	}
+
+	.route-destination {
+		fill: #cbd6ec;
+	}
+
+	.route-label {
+		position: absolute;
+		padding: 0.45rem 0.7rem;
+		border: 1px solid #e1e8f7;
+		border-radius: 0.5rem;
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 8px 20px rgba(15, 27, 61, 0.07);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: #4f5f7b;
+	}
+
+	.route-label-start {
+		bottom: 3.3rem;
+		left: 0;
+	}
+
+	.route-label-stop {
+		right: 19%;
+		bottom: 3.8rem;
+	}
+
+	@media (max-width: 900px) {
+		.not-found-grid {
+			grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
+			gap: 1.5rem;
+		}
+
+		.not-found-visual {
+			min-height: 20rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.not-found {
+			min-height: auto;
+			padding: 5.5rem 0 4rem;
+		}
+
+		.not-found-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+
+		.not-found-copy h1 {
+			font-size: clamp(2.8rem, 14vw, 4rem);
+		}
+
+		.not-found-visual {
+			min-height: 15rem;
+		}
+
+		.not-found-visual svg {
+			top: 0;
+		}
+
+		.route-label {
+			display: none;
+		}
+	}
+
+	@media (max-width: 430px) {
+		.not-found-actions {
+			display: grid;
+		}
+
+		.not-found-actions .button {
+			width: 100%;
+		}
+	}
+</style>

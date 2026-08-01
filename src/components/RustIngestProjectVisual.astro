@@ -1,0 +1,549 @@
+---
+import Icon from "./Icon.astro";
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={["rust-project-visual", { compact }]} aria-hidden="true">
+	<svg class="rust-art-background" viewBox="0 0 760 430" preserveAspectRatio="none">
+		<path d="M-12 342C123 241 211 390 342 269C454 164 558 198 786 58"></path>
+		<path d="M45 72C167 154 250 41 370 111C481 177 573 91 731 174"></path>
+		<circle cx="678" cy="88" r="57"></circle>
+		<circle cx="93" cy="351" r="42"></circle>
+	</svg>
+
+	<div class="rust-cloud-label">
+		<Icon name="skillAws" />
+		<span>AWS serverless pipeline</span>
+	</div>
+
+	<svg class="rust-flow" viewBox="0 0 760 430" preserveAspectRatio="none">
+		<path class="flow-in flow-in-top" d="M119 127C177 127 184 186 251 203"></path>
+		<path class="flow-in flow-in-middle" d="M119 215H251"></path>
+		<path class="flow-in flow-in-bottom" d="M119 303C177 303 184 244 251 227"></path>
+		<path class="flow-main" d="M352 215H443"></path>
+		<path class="flow-main" d="M532 215H624"></path>
+		<path class="flow-retry" d="M487 263V306C487 330 506 342 533 342H570"></path>
+		<circle cx="186" cy="215" r="4"></circle>
+		<circle cx="398" cy="215" r="4"></circle>
+		<circle cx="578" cy="215" r="4"></circle>
+	</svg>
+
+	<div class="rust-events">
+		<div class="rust-event event-one"><i></i><span>Payment</span></div>
+		<div class="rust-event event-two"><i></i><span>Refund</span></div>
+		<div class="rust-event event-three"><i></i><span>Settlement</span></div>
+		<strong>Incoming events</strong>
+		<small>Bursty webhook traffic</small>
+	</div>
+
+	<div class="rust-engine">
+		<div class="rust-engine-ring ring-one"></div>
+		<div class="rust-engine-ring ring-two"></div>
+		<div class="rust-engine-core">
+			<Icon name="skillRust" />
+		</div>
+		<strong>Rust receiver</strong>
+		<small>Fast acceptance path</small>
+	</div>
+
+	<div class="rust-service rust-queue">
+		<div class="service-orbit"></div>
+		<div class="service-icon">
+			<Icon name="skillAwsSqs" />
+		</div>
+		<strong>Amazon SQS</strong>
+		<small>Durable event buffer</small>
+		<div class="queue-packets"><i></i><i></i><i></i><i></i></div>
+	</div>
+
+	<div class="rust-service rust-store">
+		<div class="service-orbit"></div>
+		<div class="service-icon">
+			<Icon name="skillDynamodb" />
+		</div>
+		<strong>DynamoDB</strong>
+		<small>Persisted events</small>
+	</div>
+
+	<div class="rust-dlq">
+		<span>DLQ</span>
+		<div>
+			<strong>Retry isolation</strong>
+			<small>Failed events stay recoverable</small>
+		</div>
+	</div>
+
+	<div class="rust-signal signal-fast">
+		<span>Fast</span>
+		<i></i>
+	</div>
+	<div class="rust-signal signal-durable">
+		<span>Durable</span>
+		<i></i>
+	</div>
+
+	<div class="rust-caption">
+		<Icon name="serviceCloud" />
+		<span>Headless payment ingestion</span>
+	</div>
+</div>
+
+<style>
+	.rust-project-visual {
+		position: relative;
+		width: 100%;
+		min-height: 20rem;
+		container-type: inline-size;
+		overflow: hidden;
+		border: 1px solid #dce5f7;
+		border-radius: 1.35rem;
+		background:
+			radial-gradient(circle at 70% 18%, rgba(229, 104, 45, 0.12), transparent 0 23%),
+			linear-gradient(145deg, #fbfdff 0%, #edf4ff 100%);
+		box-shadow: 0 18px 42px rgba(15, 27, 61, 0.075);
+		font-family: "Manrope", sans-serif;
+	}
+
+	.rust-art-background,
+	.rust-flow {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.rust-art-background path,
+	.rust-art-background circle {
+		fill: none;
+		stroke: rgba(54, 94, 186, 0.12);
+		stroke-width: 1.2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.rust-flow {
+		z-index: 1;
+	}
+
+	.rust-flow path {
+		fill: none;
+		stroke-linecap: round;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.flow-in {
+		stroke: #91a9da;
+		stroke-width: 1.8;
+	}
+
+	.flow-main {
+		stroke: #3f70dd;
+		stroke-width: 2.5;
+		stroke-dasharray: 4 7;
+	}
+
+	.flow-retry {
+		stroke: #df7a48;
+		stroke-width: 1.8;
+	}
+
+	.rust-flow circle {
+		fill: #2f69ff;
+		stroke: #fff;
+		stroke-width: 2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.rust-cloud-label,
+	.rust-events,
+	.rust-engine,
+	.rust-service,
+	.rust-dlq,
+	.rust-signal,
+	.rust-caption {
+		position: absolute;
+		z-index: 2;
+	}
+
+	.rust-cloud-label {
+		right: 5%;
+		top: 7%;
+		display: flex;
+		align-items: center;
+		gap: 0.42rem;
+		font-size: 0.55rem;
+		font-weight: 800;
+		letter-spacing: 0.05em;
+		color: #596d94;
+	}
+
+	.rust-cloud-label :global(.icon) {
+		width: 1.6rem;
+		height: 1.1rem;
+		color: #26364f;
+	}
+
+	.rust-events {
+		left: 4%;
+		top: 22%;
+		display: grid;
+		gap: 0.38rem;
+		width: 15%;
+	}
+
+	.rust-event {
+		display: flex;
+		align-items: center;
+		gap: 0.38rem;
+		padding: 0.42rem 0.5rem;
+		border: 1px solid #dce4f3;
+		border-radius: 0.55rem;
+		background: rgba(255, 255, 255, 0.96);
+		box-shadow: 0 7px 15px rgba(28, 48, 88, 0.07);
+	}
+
+	.rust-event i {
+		width: 0.42rem;
+		height: 0.42rem;
+		flex: none;
+		border-radius: 50%;
+		background: #2f69ff;
+	}
+
+	.event-two {
+		margin-left: 0.75rem;
+	}
+
+	.event-two i {
+		background: #e2682e;
+	}
+
+	.event-three i {
+		background: #29a868;
+	}
+
+	.rust-event span {
+		font-size: 0.45rem;
+		font-weight: 800;
+		color: #445673;
+	}
+
+	.rust-events > strong {
+		margin-top: 0.2rem;
+		font-size: 0.57rem;
+		color: #263a59;
+	}
+
+	.rust-events > small {
+		margin-top: -0.3rem;
+		font-size: 0.39rem;
+		color: #7d8ba2;
+	}
+
+	.rust-engine {
+		left: 30%;
+		top: 24%;
+		display: grid;
+		place-items: center;
+		width: 17%;
+		text-align: center;
+	}
+
+	.rust-engine-core {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		place-items: center;
+		width: 5.6rem;
+		height: 5.6rem;
+		margin-bottom: 0.72rem;
+		border: 0.42rem solid #fff;
+		border-radius: 50%;
+		background: #e56c33;
+		box-shadow: 0 18px 34px rgba(190, 73, 26, 0.24);
+	}
+
+	.rust-engine-core :global(.icon) {
+		width: 3.25rem;
+		height: 3.25rem;
+		filter: invert(1);
+	}
+
+	.rust-engine-ring {
+		position: absolute;
+		top: -0.32rem;
+		width: 6.8rem;
+		height: 6.8rem;
+		border: 1px solid rgba(226, 104, 46, 0.26);
+		border-radius: 50%;
+	}
+
+	.ring-one {
+		transform: rotate(27deg) scaleX(1.2);
+	}
+
+	.ring-two {
+		transform: rotate(-31deg) scaleY(0.7);
+	}
+
+	.rust-engine strong,
+	.rust-service strong {
+		font-size: 0.64rem;
+		color: #263a59;
+	}
+
+	.rust-engine small,
+	.rust-service small {
+		font-size: 0.42rem;
+		color: #7d8ba2;
+	}
+
+	.rust-service {
+		top: 24%;
+		display: grid;
+		place-items: center;
+		width: 15%;
+		text-align: center;
+	}
+
+	.rust-queue {
+		left: 57%;
+	}
+
+	.rust-store {
+		right: 4%;
+	}
+
+	.service-icon {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		place-items: center;
+		width: 5.2rem;
+		height: 5.2rem;
+		margin-bottom: 0.72rem;
+		border: 0.38rem solid #fff;
+		border-radius: 50%;
+		background: #fff0f7;
+		box-shadow: 0 16px 31px rgba(31, 48, 82, 0.15);
+	}
+
+	.rust-store .service-icon {
+		background: #edf3ff;
+	}
+
+	.service-icon :global(.icon) {
+		width: 3rem;
+		height: 3rem;
+	}
+
+	.service-orbit {
+		position: absolute;
+		top: -0.25rem;
+		width: 6.15rem;
+		height: 6.15rem;
+		border: 1px dashed rgba(70, 108, 194, 0.23);
+		border-radius: 50%;
+	}
+
+	.queue-packets {
+		display: flex;
+		gap: 0.18rem;
+		margin-top: 0.42rem;
+	}
+
+	.queue-packets i {
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 0.1rem;
+		background: #dc5797;
+		opacity: 0.78;
+	}
+
+	.rust-dlq {
+		left: 59%;
+		bottom: 8%;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 0.65rem;
+		border: 1px solid #efcfbf;
+		border-radius: 0.7rem;
+		background: rgba(255, 248, 244, 0.97);
+		box-shadow: 0 10px 21px rgba(130, 65, 34, 0.09);
+	}
+
+	.rust-dlq > span {
+		display: grid;
+		place-items: center;
+		width: 1.65rem;
+		height: 1.65rem;
+		border-radius: 50%;
+		background: #e56c33;
+		font-size: 0.42rem;
+		font-weight: 800;
+		color: #fff;
+	}
+
+	.rust-dlq > div {
+		display: grid;
+		gap: 0.04rem;
+	}
+
+	.rust-dlq strong {
+		font-size: 0.48rem;
+		color: #8b4b2d;
+	}
+
+	.rust-dlq small {
+		font-size: 0.35rem;
+		color: #a16e57;
+	}
+
+	.rust-signal {
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+		padding: 0.22rem 0.38rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: 0 6px 13px rgba(28, 48, 88, 0.07);
+		font-size: 0.38rem;
+		font-weight: 800;
+		color: #637493;
+	}
+
+	.rust-signal i {
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 50%;
+		background: #29a868;
+	}
+
+	.signal-fast {
+		left: 47%;
+		top: 43%;
+	}
+
+	.signal-durable {
+		left: 74%;
+		top: 43%;
+	}
+
+	.rust-caption {
+		left: 5%;
+		bottom: 5%;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.53rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #566b91;
+	}
+
+	.rust-caption :global(.icon) {
+		width: 1.05rem;
+		height: 1.05rem;
+		color: #2f69ff;
+	}
+
+	.rust-project-visual.compact {
+		min-height: 100%;
+		height: 100%;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.compact .rust-engine {
+		left: 29%;
+	}
+
+	.compact .rust-queue {
+		left: 56%;
+	}
+
+	.compact .rust-store {
+		right: 3%;
+	}
+
+	@container (max-width: 430px) {
+		.rust-events {
+			left: 3%;
+			width: 16%;
+		}
+
+		.rust-event {
+			padding: 0.34rem;
+		}
+
+		.rust-event span {
+			font-size: 0.36rem;
+		}
+
+		.rust-engine-core {
+			width: 4.45rem;
+			height: 4.45rem;
+		}
+
+		.rust-engine-core :global(.icon) {
+			width: 2.55rem;
+			height: 2.55rem;
+		}
+
+		.rust-engine-ring {
+			top: -0.22rem;
+			width: 5.25rem;
+			height: 5.25rem;
+		}
+
+		.service-icon {
+			width: 4.2rem;
+			height: 4.2rem;
+		}
+
+		.service-icon :global(.icon) {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.service-orbit {
+			width: 4.95rem;
+			height: 4.95rem;
+		}
+
+		.rust-engine strong,
+		.rust-service strong,
+		.rust-events > strong {
+			font-size: 0.48rem;
+		}
+
+		.rust-engine small,
+		.rust-service small,
+		.rust-events > small {
+			font-size: 0.32rem;
+		}
+
+		.rust-cloud-label span,
+		.rust-caption span,
+		.rust-dlq small {
+			display: none;
+		}
+
+		.rust-dlq {
+			padding: 0.38rem 0.45rem;
+		}
+
+		.rust-signal {
+			display: none;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.rust-project-visual:not(.compact) {
+			min-height: 17rem;
+		}
+	}
+</style>

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Htet Lin Maung - Resume</title>
+		<link rel="stylesheet" href="./resume.css" />
+		<link rel="stylesheet" href="./resume-white.css" />
+		<script>
+			if (new URLSearchParams(window.location.search).get("theme") === "white") {
+				document.documentElement.dataset.theme = "white";
+			}
+		</script>
+	</head>
+	<body>
+		<svg class="icon-library" aria-hidden="true">
+			<symbol id="icon-hm" viewBox="0 0 166 144" stroke="none">
+				<path d="M20 20H42V62H72V20H94V124H72V84H42V124H20Z" fill="#2f69ff" stroke="none"></path>
+				<path d="M78 34L112 64L146 34V124H124V80L112 91L100 80V124H78Z" fill="#2f69ff" stroke="none"></path>
+			</symbol>
+			<symbol id="icon-mail" viewBox="0 0 256 193">
+				<path fill="#4285f4" d="M58.182 192.05V93.14L27.507 65.077L0 49.504v125.091c0 9.658 7.825 17.455 17.455 17.455z"></path>
+				<path fill="#34a853" d="M197.818 192.05h40.727c9.659 0 17.455-7.826 17.455-17.455V49.505l-31.156 17.837l-27.026 25.798z"></path>
+				<path fill="#ea4335" d="m58.182 93.14l-4.174-38.647l4.174-36.989L128 69.868l69.818-52.364l4.669 34.992l-4.669 40.644L128 145.504z"></path>
+				<path fill="#fbbc04" d="M197.818 17.504V93.14L256 49.504V26.231c0-21.585-24.64-33.89-41.89-20.945z"></path>
+				<path fill="#c5221f" d="m0 49.504l26.759 20.07L58.182 93.14V17.504L41.89 5.286C24.61-7.66 0 4.646 0 26.23z"></path>
+			</symbol>
+			<symbol id="icon-location" viewBox="0 0 256 367">
+				<path fill="#34a853" d="M70.585 271.865a371 371 0 0 1 28.911 42.642c7.374 13.982 10.448 23.463 15.837 40.31c3.305 9.308 6.292 12.086 12.714 12.086c6.998 0 10.173-4.726 12.626-12.035c5.094-15.91 9.091-28.052 15.397-39.525c12.374-22.15 27.75-41.833 42.858-60.75c4.09-5.354 30.534-36.545 42.439-61.156c0 0 14.632-27.035 14.632-64.792c0-35.318-14.43-59.813-14.43-59.813l-41.545 11.126l-25.23 66.451l-6.242 9.163l-1.248 1.66l-1.66 2.078l-2.914 3.319l-4.164 4.163l-22.467 18.304l-56.17 32.432z"></path>
+				<path fill="#fbbc04" d="M12.612 188.892c13.709 31.313 40.145 58.839 58.031 82.995l95.001-112.534s-13.384 17.504-37.662 17.504c-27.043 0-48.89-21.595-48.89-48.825c0-18.673 11.234-31.501 11.234-31.501l-64.489 17.28z"></path>
+				<path fill="#4285f4" d="M166.705 5.787c31.552 10.173 58.558 31.53 74.893 63.023l-75.925 90.478s11.234-13.06 11.234-31.617c0-27.864-23.463-48.68-48.81-48.68c-23.969 0-37.735 17.475-37.735 17.475v-57z"></path>
+				<path fill="#1a73e8" d="M30.015 45.765C48.86 23.218 82.02 0 127.736 0c22.18 0 38.89 5.823 38.89 5.823L90.29 96.516H36.205z"></path>
+				<path fill="#ea4335" d="M12.612 188.892S0 164.194 0 128.414c0-33.817 13.146-63.377 30.015-82.649l60.318 50.759z"></path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="-12 -12 280 280">
+				<rect width="256" height="256" fill="#0a66c2" rx="60"></rect>
+				<path fill="#fff" d="M184.715 217.685h29.27a4 4 0 0 0 4-3.999l.015-61.842c0-32.323-6.965-57.168-44.738-57.168c-14.359-.534-27.9 6.868-35.207 19.228a.32.32 0 0 1-.595-.161V101.66a4 4 0 0 0-4-4h-27.777a4 4 0 0 0-4 4v112.02a4 4 0 0 0 4 4h29.268a4 4 0 0 0 4-4v-55.373c0-15.657 2.97-30.82 22.381-30.82c19.135 0 19.383 17.916 19.383 31.834v54.364a4 4 0 0 0 4 4M38 59.628c0 11.864 9.767 21.626 21.632 21.626c11.862-.001 21.623-9.769 21.623-21.631C81.253 47.761 71.491 38 59.628 38C47.762 38 38 47.763 38 59.627m6.959 158.058h29.307a4 4 0 0 0 4-4V101.66a4 4 0 0 0-4-4H44.959a4 4 0 0 0-4 4v112.025a4 4 0 0 0 4 4"></path>
+			</symbol>
+			<symbol id="icon-github" viewBox="-1.5 -1.5 27 27">
+				<path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+			</symbol>
+			<symbol id="icon-portfolio" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12a10 10 0 1 1-20.001 0A10 10 0 0 1 22 12Z"></path><path d="M16 12c0 1.313-.104 2.614-.305 3.827c-.2 1.213-.495 2.315-.867 3.244c-.371.929-.812 1.665-1.297 2.168c-.486.502-1.006.761-1.531.761s-1.045-.259-1.53-.761c-.486-.503-.927-1.24-1.298-2.168c-.372-.929-.667-2.03-.868-3.244A23.6 23.6 0 0 1 8 12c0-1.313.103-2.614.304-3.827s.496-2.315.868-3.244c.371-.929.812-1.665 1.297-2.168C10.955 2.26 11.475 2 12 2s1.045.259 1.53.761c.486.503.927 1.24 1.298 2.168c.372.929.667 2.03.867 3.244C15.897 9.386 16 10.687 16 12Z"></path><path stroke-linecap="round" d="M2 12h20"></path></g>
+			</symbol>
+			<symbol id="icon-code" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="m15.5 9l.172.172c1.333 1.333 2 2 2 2.828s-.667 1.495-2 2.828L15.5 15m-2.206-7.83L12 12l-1.294 4.83M8.5 9l-.171.172c-1.334 1.333-2 2-2 2.828s.666 1.495 2 2.828L8.5 15"></path><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"></path></g>
+			</symbol>
+			<symbol id="icon-cloud" viewBox="0 0 24 24">
+				<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M14.381 9.027a5.8 5.8 0 0 1 1.905-.321c.654 0 1.283.109 1.87.309m-11.04 2.594a4.4 4.4 0 0 0-.83-.08C3.919 11.53 2 13.426 2 15.765S3.919 20 6.286 20h10C19.442 20 22 17.472 22 14.353c0-2.472-1.607-4.573-3.845-5.338M7.116 11.609a5.6 5.6 0 0 1-.354-1.962C6.762 6.528 9.32 4 12.476 4c2.94 0 5.361 2.194 5.68 5.015m-11.04 2.594a4.3 4.3 0 0 1 1.55.634"></path>
+			</symbol>
+			<symbol id="icon-server" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 17c0-1.886 0-2.828.586-3.414S4.114 13 6 13h12c1.886 0 2.828 0 3.414.586S22 15.114 22 17s0 2.828-.586 3.414S19.886 21 18 21H6c-1.886 0-2.828 0-3.414-.586S2 18.886 2 17ZM2 6c0-1.886 0-2.828.586-3.414S4.114 2 6 2h12c1.886 0 2.828 0 3.414.586S22 4.114 22 6s0 2.828-.586 3.414S19.886 10 18 10H6c-1.886 0-2.828 0-3.414-.586S2 7.886 2 6Z"></path><path stroke-linecap="round" d="M13.5 6H18M6 7V5m3 2V5m4.5 12H18M6 18v-2m3 2v-2"></path></g>
+			</symbol>
+			<symbol id="icon-layout" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M11 17H8c-2.828 0-4.243 0-5.121-.879C2 15.243 2 13.828 2 11v-1c0-3.771 0-5.657 1.172-6.828S6.229 2 10 2h5.5c2.335 0 3.502 0 4.386.472a4 4 0 0 1 1.642 1.642C22 4.998 22 6.165 22 8.5"></path><path d="M14 15c0-1.886 0-2.828.586-3.414S16.114 11 18 11s2.828 0 3.414.586S22 13.114 22 15v3c0 1.886 0 2.828-.586 3.414S19.886 22 18 22s-2.828 0-3.414-.586S14 19.886 14 18z"></path><path stroke-linecap="round" d="M19 20h-2m-6 2H8m3 0v-5m0-4H2"></path></g>
+			</symbol>
+			<symbol id="icon-database" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M4 18V6m16 0v12"></path><path d="M12 10c4.418 0 8-1.79 8-4s-3.582-4-8-4s-8 1.79-8 4s3.582 4 8 4Zm8 2c0 2.21-3.582 4-8 4s-8-1.79-8-4m16 6c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></g>
+			</symbol>
+			<symbol id="icon-tool" viewBox="0 0 24 24">
+				<g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><path d="M13.765 2.152C13.398 2 12.932 2 12 2s-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083c-.092.223-.129.484-.143.863a1.62 1.62 0 0 1-.79 1.353a1.62 1.62 0 0 1-1.567.008c-.336-.178-.579-.276-.82-.308a2 2 0 0 0-1.478.396C4.04 5.79 3.806 6.193 3.34 7s-.7 1.21-.751 1.605a2 2 0 0 0 .396 1.479c.148.192.355.353.676.555c.473.297.777.803.777 1.361s-.304 1.064-.777 1.36c-.321.203-.529.364-.676.556a2 2 0 0 0-.396 1.479c.052.394.285.798.75 1.605c.467.807.7 1.21 1.015 1.453a2 2 0 0 0 1.479.396c.24-.032.483-.13.819-.308a1.62 1.62 0 0 1 1.567.008c.483.28.77.795.79 1.353c.014.38.05.64.143.863a2 2 0 0 0 1.083 1.083C10.602 22 11.068 22 12 22s1.398 0 1.765-.152a2 2 0 0 0 1.083-1.083c.092-.223.129-.483.143-.863c.02-.558.307-1.074.79-1.353a1.62 1.62 0 0 1 1.567-.008c.336.178.579.276.819.308a2 2 0 0 0 1.479-.396c.315-.242.548-.646 1.014-1.453s.7-1.21.751-1.605a2 2 0 0 0-.396-1.479c-.148-.192-.355-.353-.676-.555A1.62 1.62 0 0 1 19.562 12c0-.558.304-1.064.777-1.36c.321-.203.529-.364.676-.556a2 2 0 0 0 .396-1.479c-.052-.394-.285-.798-.75-1.605c-.467-.807-.7-1.21-1.015-1.453a2 2 0 0 0-1.479-.396c-.24.032-.483.13-.82.308a1.62 1.62 0 0 1-1.566-.008a1.62 1.62 0 0 1-.79-1.353c-.014-.38-.05-.64-.143-.863a2 2 0 0 0-1.083-1.083Z"></path></g>
+			</symbol>
+		</svg>
+
+		<section class="page page-one" aria-label="Resume page 1">
+			<aside class="identity-rail">
+				<div class="rail-top">
+					<div class="mark" aria-label="Htet Lin Maung monogram">
+						<svg viewBox="0 0 166 144" role="img" aria-hidden="true"><use href="#icon-hm"></use></svg>
+					</div>
+				</div>
+
+				<div class="experience-metric">
+					<strong>7<span>+</span></strong>
+					<p>Years building software that performs in production.</p>
+				</div>
+
+				<section class="rail-section">
+					<p class="rail-label">Technical core</p>
+					<div class="skill-list">
+						<div class="skill">
+							<svg><use href="#icon-code"></use></svg>
+							<div><h3>Languages</h3><p>TypeScript, JavaScript, C#, Rust, Java, Python, Go</p></div>
+						</div>
+						<div class="skill">
+							<svg><use href="#icon-cloud"></use></svg>
+							<div><h3>AWS & Cloud</h3><p>Lambda, API Gateway, Step Functions, SQS, SNS, EventBridge, DynamoDB, S3, CloudWatch Logs, CDK, Azure, Datadog</p></div>
+						</div>
+						<div class="skill">
+							<svg><use href="#icon-server"></use></svg>
+							<div><h3>Backend</h3><p>Node.js, .NET, Spring Boot, Axum, Express</p></div>
+						</div>
+						<div class="skill">
+							<svg><use href="#icon-layout"></use></svg>
+							<div><h3>Frontend & Mobile</h3><p>React, React Native, Xamarin, Next.js, Astro.js, Vue.js, Flutter</p></div>
+						</div>
+						<div class="skill">
+							<svg><use href="#icon-database"></use></svg>
+							<div><h3>Data</h3><p>PostgreSQL, MongoDB, MySQL, Redis, DynamoDB</p></div>
+						</div>
+						<div class="skill">
+							<svg><use href="#icon-tool"></use></svg>
+							<div><h3>Delivery</h3><p>Docker, GitLab CI, GitHub Actions, NGINX, Linux, Azure DevOps, Git</p></div>
+						</div>
+					</div>
+				</section>
+
+				<section class="rail-footer">
+					<p class="rail-label">Education</p>
+					<h3>Bachelor of Engineering</h3>
+					<p>Electronics and Communication<br />West Yangon Technological University<br />2013 - 2018</p>
+					<div class="language-line"></div>
+					<p><strong>Burmese</strong> / Native<br /><strong>English</strong> / Professional working proficiency</p>
+				</section>
+			</aside>
+
+			<main class="resume-main">
+				<header class="hero">
+					<p class="eyebrow">Software Engineer / Cloud Engineer</p>
+					<h1>Htet Lin Maung</h1>
+					<p class="location"><svg><use href="#icon-location"></use></svg>Chiba, Japan</p>
+				</header>
+
+				<div class="contact-grid" aria-label="Contact details">
+					<div class="contact-entry contact-email"><span class="contact-icon"><svg><use href="#icon-mail"></use></svg></span><span>jsthtet96@gmail.com</span></div>
+					<a class="contact-github" href="https://github.com/HtetLinMaung"><span class="contact-icon"><svg><use href="#icon-github"></use></svg></span><span>github.com/HtetLinMaung</span></a>
+					<a class="contact-linkedin" href="https://www.linkedin.com/in/htet-lin-maung-5b544a269"><span class="contact-icon"><svg><use href="#icon-linkedin"></use></svg></span><span>linkedin.com/in/htet-lin-maung-5b544a269</span></a>
+					<a class="contact-portfolio" href="https://htetlinmaung.github.io/"><span class="contact-icon"><svg><use href="#icon-portfolio"></use></svg></span><span>htetlinmaung.github.io/</span></a>
+				</div>
+
+				<section class="profile">
+					<p class="section-index">01</p>
+					<div>
+						<p class="section-kicker">Profile</p>
+						<p class="profile-copy">Software engineer with 7+ years of experience building full-stack applications, cloud-native systems, and distributed services. Strong background in AWS serverless architecture, backend engineering, frontend delivery, and technical leadership.</p>
+					</div>
+				</section>
+
+				<section class="experience-section">
+					<div class="section-heading">
+						<p class="section-index">02</p>
+						<div><p class="section-kicker">Career</p><h2>Professional Experience</h2></div>
+					</div>
+
+					<div class="timeline">
+						<article class="job">
+							<div class="job-dot"></div>
+							<div class="job-meta"><p>Jun 2024</p><span>Dec 2025</span></div>
+							<div class="job-content">
+								<h3>Software Engineer / Cloud Engineer</h3>
+								<p class="company">Nextstep Engineering Software Solutions</p>
+								<ul>
+									<li><strong>Maintained</strong> and <strong>enhanced</strong> an existing AWS-based Flight Profile Optimizer using .NET/C#, Lambda, API Gateway, Step Functions, DynamoDB, and S3.</li>
+									<li><strong>Maintained</strong> <strong>React Native</strong> and <strong>Xamarin</strong> iPad applications used by <strong>pilots</strong> with the Flight Profile Optimizer Cloud platform.</li>
+									<li><strong>Implemented</strong> complex <strong>aerospace</strong> <strong>requirements</strong> while collaborating with a <strong>multinational</strong> <strong>team</strong> across Germany, Italy, Thailand, and Ukraine.</li>
+									<li><strong>Built</strong> <strong>event-driven</strong> <strong>workflows</strong> using <strong>S3 Event Notifications</strong> for object creation, <strong>DynamoDB Streams</strong> for item inserts and updates, plus SQS, SNS, and EventBridge. <strong>Deployed</strong> infrastructure using TypeScript CDK.</li>
+									<li><strong>Resolved</strong> <strong>CloudFormation's</strong> <strong>500-resource</strong> <strong>limit</strong> using nested stacks to simplify maintenance.</li>
+									<li><strong>Monitored</strong> Flight Profile Optimizer <strong>production</strong> environments for multiple customers using Amazon <strong>CloudWatch Logs</strong> and <strong>Datadog</strong>, verified service health, and <strong>escalated</strong> <strong>critical</strong> errors and warnings.</li>
+								</ul>
+							</div>
+						</article>
+
+						<article class="job">
+							<div class="job-dot"></div>
+							<div class="job-meta"><p>Nov 2020</p><span>May 2024</span></div>
+							<div class="job-content">
+								<h3>Software Developer / Team Lead</h3>
+								<p class="company">Myanmar Information Technology</p>
+								<ul>
+									<li><strong>Led</strong> <strong>development</strong> of a mobile banking platform with a Java backend on Azure Functions and Azure SQL Database, and a Flutter mobile frontend.</li>
+									<li><strong>Delivered</strong> <strong>iBanking</strong> using the same backend services with an Angular frontend.</li>
+									<li><strong>Led</strong> <strong>development</strong> of a mobile wallet using Node.js, AWS Lambda, Amazon Cognito, PostgreSQL, and Flutter.</li>
+									<li><strong>Built</strong> an <strong>exchange</strong> <strong>counter</strong> application using Node.js, AWS Lambda, Amazon Cognito, PostgreSQL, and Angular.</li>
+								</ul>
+							</div>
+						</article>
+
+						<article class="job">
+							<div class="job-dot"></div>
+							<div class="job-meta"><p>Oct 2018</p><span>Oct 2020</span></div>
+							<div class="job-content">
+								<h3>Frontend Developer</h3>
+								<p class="company">Thetys</p>
+								<ul>
+									<li><strong>Built</strong> <strong>single-page</strong> <strong>applications</strong> with Vue.js, Vuetify, and Vuex from detailed interface designs.</li>
+									<li><strong>Improved</strong> <strong>usability</strong> and <strong>performance</strong> across browsers, screen sizes, and device types.</li>
+								</ul>
+							</div>
+						</article>
+					</div>
+				</section>
+			</main>
+			<span class="page-number">01 / 02</span>
+		</section>
+
+		<section class="page page-two" aria-label="Resume page 2">
+			<header class="page-two-header">
+				<div class="compact-mark" aria-label="Htet Lin Maung monogram">
+					<svg viewBox="0 0 166 144" role="img" aria-hidden="true"><use href="#icon-hm"></use></svg>
+				</div>
+				<div><p>Htet Lin Maung</p><span>Software Engineer</span></div>
+			</header>
+
+			<main class="page-two-main">
+				<section class="work-intro">
+					<div>
+						<p class="section-kicker">Selected work / 2026</p>
+						<h2>Systems built<br />to hold up.</h2>
+					</div>
+					<p>Cloud architecture, automation, and performance-focused engineering selected from professional and open-source work.</p>
+				</section>
+
+				<section class="project-grid">
+					<article class="project">
+						<div class="project-top"><span>01</span></div>
+						<p class="project-kicker">Aerospace / AWS</p>
+						<h3>Flight Profile Optimizer</h3>
+						<p>Flight-optimization platform that processes airline operational data and generates trajectory options to reduce fuel burn while meeting flight constraints.</p>
+						<p class="tech">C# / .NET / AWS Lambda / AWS Step Functions / Amazon DynamoDB / Amazon S3</p>
+						<a href="https://htetlinmaung.github.io/projects/flight-profile-optimizer">htetlinmaung.github.io/projects/flight-profile-optimizer</a>
+					</article>
+
+					<article class="project">
+						<div class="project-top"><span>02</span></div>
+						<p class="project-kicker">Azure / Mobile / Web</p>
+						<h3>Mobile Banking</h3>
+						<p>Flutter Mobile Banking and Angular iBanking connected to a shared Java backend running on Azure Functions with Azure SQL Database.</p>
+						<p class="tech">Java / Azure Functions / Azure SQL Database / Flutter / Angular</p>
+						<a href="https://htetlinmaung.github.io/projects/mobile-banking">htetlinmaung.github.io/projects/mobile-banking</a>
+					</article>
+
+					<article class="project">
+						<div class="project-top"><span>03</span></div>
+						<p class="project-kicker">Backend / AWS</p>
+						<h3>Rust Payment Event Pipeline</h3>
+						<p>Serverless payment notification pipeline in Rust using AWS Lambda, SQS, and DynamoDB to handle high-volume events reliably.</p>
+						<p class="tech">Rust / API Gateway v2 / AWS Lambda / Amazon SQS / Amazon DynamoDB / AWS CDK (TypeScript)</p>
+						<a href="https://htetlinmaung.github.io/projects/rust-ingest">htetlinmaung.github.io/projects/rust-ingest</a>
+					</article>
+
+					<article class="project">
+						<div class="project-top"><span>04</span></div>
+						<p class="project-kicker">Automation / Backend</p>
+						<h3>WebWand</h3>
+						<p>Dockerized browser-automation microservice for PDF and image rendering, screenshots, web scraping, authenticated navigation, and automated form submission.</p>
+						<p class="tech">Node.js / Express / Puppeteer / Docker</p>
+						<a href="https://github.com/HtetLinMaung/webwand">github.com/HtetLinMaung/webwand</a>
+					</article>
+				</section>
+
+				<section class="page-two-bottom">
+					<div class="open-source">
+						<div class="more-projects-heading">
+							<p class="section-kicker">More projects</p>
+							<a href="https://htetlinmaung.github.io/projects">htetlinmaung.github.io/projects</a>
+						</div>
+						<div class="source-row"><strong>Watch Vault by Diggie</strong><span>Flutter / Rust / InstantIO / WebWand</span></div>
+						<a class="source-row" href="https://github.com/HtetLinMaung/loadfire"><strong>LoadFire</strong><span>Rust / YAML / CLI</span></a>
+						<a class="source-row" href="https://github.com/HtetLinMaung/report_forge"><strong>Report Forge</strong><span>Rust / sitetopdf / Docker</span></a>
+						<a class="source-row" href="https://github.com/HtetLinMaung/instantio"><strong>InstantIO</strong><span>Node.js / Socket.IO / Docker</span></a>
+					</div>
+					<aside class="principles">
+						<p class="section-kicker">Engineering approach</p>
+						<p>Clean code</p><p>Cloud solutions</p><p>Quality first</p><p>Problem solving</p>
+					</aside>
+				</section>
+			</main>
+
+			<div class="page-two-footer">
+				<strong>github.com/HtetLinMaung</strong>
+				<span>02 / 02</span>
+			</div>
+		</section>
+	</body>
+</html>

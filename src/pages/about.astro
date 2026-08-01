@@ -1,0 +1,41 @@
+---
+import Icon from "../components/Icon.astro";
+import AboutEngineerVisual from "../components/AboutEngineerVisual.astro";
+import StatsGrid from "../components/StatsGrid.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import { aboutDetails, stats } from "../data/portfolio";
+---
+
+<PortfolioLayout title="Htet Lin Maung | About" currentPath="/about">
+	<section class="page-banner">
+		<div class="container about-hero-grid">
+			<div class="about-hero-copy">
+				<p class="eyebrow">About</p>
+				<h1>Passionate about creating impactful products.</h1>
+				<p>
+					I’m a software engineer with experience in full stack development, cloud architecture,
+					and distributed systems. I enjoy turning complex problems into simple, beautiful, and
+					intuitive solutions.
+				</p>
+
+				<div class="about-details about-hero-details">
+					{
+						aboutDetails.map((detail) => (
+							<div class="detail-item">
+								<div class="icon-wrap"><Icon name={detail.icon} /></div>
+								<p>{detail.text}</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="about-portrait-column">
+				<AboutEngineerVisual />
+			</div>
+		</div>
+		<div class="container">
+			<StatsGrid stats={stats} className="about-stats-grid" />
+		</div>
+	</section>
+</PortfolioLayout>

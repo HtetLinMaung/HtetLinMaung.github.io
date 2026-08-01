@@ -1,0 +1,219 @@
+---
+import Icon from "../../components/Icon.astro";
+import BankingProjectVisual from "../../components/BankingProjectVisual.astro";
+import { mobileBankingTech } from "../../data/portfolio";
+import PortfolioLayout from "../../layouts/PortfolioLayout.astro";
+import { withBase } from "../../utils/paths";
+---
+
+<PortfolioLayout title="Htet Lin Maung | Mobile Banking" currentPath="/projects">
+	<section class="page-banner">
+		<div class="container project-detail-hero banking-detail-hero">
+			<div class="project-detail-copy">
+				<p class="eyebrow">Project Detail</p>
+				<h1>Mobile Banking</h1>
+				<p>
+					A Flutter Mobile Banking application and Angular iBanking web application using the same
+					serverless AWS backend services.
+				</p>
+
+				<div class="banking-confidential-note">
+					<Icon name="bankLock" />
+					<p>
+						This is a company project. Source code, repository access, and the live system cannot
+						be shared publicly.
+					</p>
+				</div>
+
+				<ul class="chip-list project-detail-stack">
+					{mobileBankingTech.map((technology) => <li>{technology}</li>)}
+				</ul>
+
+				<div class="project-detail-actions">
+					<a class="button primary" href={withBase("/projects")}>
+						Back to Projects
+						<Icon name="arrow" />
+					</a>
+				</div>
+			</div>
+
+			<BankingProjectVisual />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="project-detail-story">
+				<div class="project-detail-story-intro">
+					<p class="eyebrow">Overview</p>
+					<h2 class="section-title">A modern banking platform for mobile and web.</h2>
+						<p>
+							The platform separates client delivery, general banking APIs, transaction processing,
+							transactional writes, account-balance reads, and private core-banking connectivity.
+					</p>
+				</div>
+
+				<div class="project-detail-story-copy">
+					<article class="project-detail-narrative">
+						<span>01</span>
+						<h3>The platform</h3>
+						<p>
+							Customers use the Flutter application for Mobile Banking and the Angular application
+							for iBanking. The Angular iBanking application is hosted as a static web application
+							on Amazon Simple Storage Service (Amazon S3) and delivered through Amazon
+							CloudFront. Login, logout, and user-management requests pass through Amazon API
+							Gateway to the General API AWS Lambda function, which calls Amazon Cognito
+							internally. An API Gateway authorizer validates tokens before protected requests
+							reach the backend.
+						</p>
+					</article>
+
+					<article class="project-detail-narrative">
+						<span>02</span>
+						<h3>My responsibility</h3>
+						<p>
+							I led the development of the mobile banking platform, coordinating the client and
+							backend implementation around shared banking workflows. The backend separates
+							general API handling from transaction-related endpoints to keep responsibilities
+							clear.
+						</p>
+					</article>
+
+					<article class="project-detail-narrative">
+						<span>03</span>
+						<h3>Architecture evolution</h3>
+						<p>
+							I independently designed the earlier company architecture using Azure Functions and
+							a custom identity and access management (IAM) microservice running in a container
+							on an Azure Virtual Machine, with MongoDB for identity-related data. That design
+							reflected my cloud architecture experience at the time. After gaining deeper
+							experience, I independently redesigned the architecture around AWS Lambda, Amazon
+							Cognito, managed data services, and clearer workload boundaries.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section project-detail-architecture-section banking-architecture-section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Architecture</p>
+				<h2 class="section-title">Two client channels, serverless services, one private banking connection.</h2>
+				<p class="project-detail-architecture-context">
+					I independently redesigned this architecture based on the lessons I learned after designing
+					and delivering the original company system. It represents the main system flow, not the
+					company&apos;s exact production architecture. The AWS resources will be defined and
+					deployed as infrastructure as code using AWS CDK with TypeScript.
+				</p>
+			</div>
+
+			<div class="project-detail-architecture">
+				<div class="project-detail-architecture-card banking-architecture-card">
+					<a
+						class="banking-architecture-image-link"
+						href={withBase("/projects/mobile-banking-architecture.png?v=20260728-8")}
+						target="_blank"
+						rel="noopener"
+						aria-label="Open the Mobile Banking architecture diagram at full size"
+					>
+						<img
+							class="project-detail-architecture-image banking-architecture-image"
+							src={withBase("/projects/mobile-banking-architecture.png?v=20260728-8")}
+							width="2464"
+							height="1360"
+							loading="lazy"
+							decoding="async"
+							alt="Architecture for Flutter Mobile Banking and Angular iBanking using Amazon Cognito, Amazon API Gateway, AWS Lambda, Amazon RDS Proxy, Amazon Aurora PostgreSQL, Amazon SQS FIFO, Amazon SNS transactional SMS, Amazon DynamoDB, Amazon CloudFront, Amazon S3, and AWS Site-to-Site VPN"
+						/>
+					</a>
+				</div>
+
+				<div class="project-detail-architecture-notes banking-architecture-notes">
+					<article>
+						<span>01</span>
+						<h3>Mobile and web delivery</h3>
+						<p>
+							Mobile Banking calls Amazon API Gateway directly. The Angular iBanking application
+							is hosted as a static web application on Amazon S3 and delivered through Amazon
+							CloudFront. Both clients use the same API Gateway and Lambda backend. The General
+							API Lambda calls Amazon Cognito internally for login, logout, and user management,
+							while an API Gateway authorizer validates tokens for protected requests.
+						</p>
+					</article>
+					<article>
+						<span>02</span>
+						<h3>Separated AWS Lambda paths</h3>
+						<p>
+							General banking endpoints and transaction-related endpoints run through separate
+							AWS Lambda functions. Both connect through Amazon RDS Proxy to Amazon Aurora
+							Serverless PostgreSQL. The General API uses a smaller Lambda configuration for
+							relational user data, limit configuration, and other application settings. The
+							transaction API uses a larger Lambda configuration for heavier transactional
+							processing. Ordered transaction events use an event-sourcing flow through Amazon SQS
+							FIFO and a synchronization Lambda function, which updates the Amazon DynamoDB read
+							model used for account-balance queries. After successful processing, the transaction
+							Lambda publishes a transactional SMS notification through Amazon SNS.
+						</p>
+					</article>
+					<article>
+						<span>03</span>
+						<h3>Core banking integration</h3>
+						<p>
+							The transaction-processing AWS Lambda function communicates with the core banking
+							API through an AWS Site-to-Site VPN rather than exposing the core system publicly.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Engineering Focus</p>
+				<h2 class="section-title">Secure APIs, managed authentication, and efficient account-data access.</h2>
+			</div>
+
+			<div class="project-detail-principles">
+				<article>
+					<h3>Shared API layer</h3>
+					<p>
+						Mobile Banking and iBanking use one Amazon API Gateway entry point and the same AWS
+						Lambda backend. The General API manages user data, limit configuration, and shared
+						banking settings consistently across Flutter and Angular.
+					</p>
+				</article>
+				<article>
+					<h3>Managed authentication</h3>
+					<p>
+						Login, logout, and user-management requests reach Amazon Cognito through the General API
+						Lambda rather than directly from either client. An Amazon API Gateway authorizer
+						validates tokens and guards protected endpoints.
+					</p>
+				</article>
+				<article>
+					<h3>CQRS read model</h3>
+					<p>
+						Transactional writes and balance queries use separate data models. Ordered events from
+						the event-sourcing flow pass through Amazon SQS FIFO and synchronize account-balance
+						data into Amazon DynamoDB for fast reads.
+					</p>
+				</article>
+			</div>
+
+			<div class="project-detail-closing banking-project-closing">
+				<div>
+					<p class="eyebrow">Company Project</p>
+					<h2>Architecture overview only. Source code and production access remain private.</h2>
+				</div>
+				<a class="button secondary" href={withBase("/projects")}>
+					Back to Projects
+					<Icon name="arrow" />
+				</a>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>
