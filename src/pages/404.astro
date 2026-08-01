@@ -9,10 +9,10 @@ import { withBase } from "../utils/paths";
 		<div class="container not-found-grid">
 			<div class="not-found-copy">
 				<p class="eyebrow">404 / Page Not Found</p>
-				<h1 id="not-found-title">This route ends here.</h1>
+				<h1 id="not-found-title">We couldn’t find this page.</h1>
 				<p class="not-found-message">
-					The page may have moved, or the address might be incomplete. Head back home or
-					take a look at my recent work.
+					The link may be outdated, or the page may have moved. You can return home or
+					browse my projects.
 				</p>
 
 				<div class="not-found-actions">
@@ -25,19 +25,42 @@ import { withBase } from "../utils/paths";
 			</div>
 
 			<div class="not-found-visual" aria-hidden="true">
-				<span class="not-found-number">404</span>
-				<svg viewBox="0 0 520 300" role="presentation">
-					<path class="route-shadow" d="M34 222C112 222 103 92 193 92s75 121 157 121c51 0 61-48 136-48" />
-					<path class="route" d="M34 222C112 222 103 92 193 92s75 121 157 121" />
-					<path class="route-missing" d="M382 205c25-13 46-40 104-40" />
-					<circle class="route-start" cx="34" cy="222" r="11" />
-					<circle class="route-node" cx="193" cy="92" r="9" />
-					<circle class="route-stop" cx="350" cy="213" r="14" />
-					<path class="route-cross" d="m344 207 12 12m0-12-12 12" />
-					<circle class="route-destination" cx="486" cy="165" r="8" />
+				<svg viewBox="0 0 640 430" role="presentation">
+					<defs>
+						<linearGradient id="error-zero" x1="0" y1="0" x2="1" y2="1">
+							<stop offset="0" stop-color="#477dff" />
+							<stop offset="1" stop-color="#2154db" />
+						</linearGradient>
+						<filter id="error-shadow" x="-30%" y="-30%" width="160%" height="160%">
+							<feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#173a91" flood-opacity="0.18" />
+						</filter>
+					</defs>
+
+					<circle class="error-halo" cx="320" cy="215" r="186" />
+					<circle class="error-orbit error-orbit-outer" cx="320" cy="215" r="154" />
+					<circle class="error-orbit error-orbit-inner" cx="320" cy="215" r="126" />
+
+					<text class="error-four error-four-shadow" x="40" y="308">4</text>
+					<text class="error-four" x="28" y="296">4</text>
+
+					<g filter="url(#error-shadow)">
+						<circle class="error-zero" cx="320" cy="215" r="101" />
+						<circle class="error-zero-cutout" cx="320" cy="215" r="47" />
+					</g>
+
+					<text class="error-four error-four-shadow" x="423" y="308">4</text>
+					<text class="error-four" x="411" y="296">4</text>
+
+					<g class="error-marker error-marker-top">
+						<path d="M0 8h16M8 0v16" />
+					</g>
+					<g class="error-marker error-marker-bottom">
+						<path d="M0 8h16M8 0v16" />
+					</g>
+					<circle class="error-dot error-dot-one" cx="492" cy="92" r="7" />
+					<circle class="error-dot error-dot-two" cx="144" cy="350" r="5" />
+					<path class="error-corner" d="M516 326h54v-54" />
 				</svg>
-				<span class="route-label route-label-start">portfolio.dev</span>
-				<span class="route-label route-label-stop">route missing</span>
 			</div>
 		</div>
 	</section>
@@ -58,12 +81,13 @@ import { withBase } from "../utils/paths";
 
 	.not-found::before {
 		position: absolute;
-		top: 15%;
-		right: 8%;
-		width: 20rem;
-		height: 20rem;
-		border: 1px solid rgba(47, 105, 255, 0.09);
-		border-radius: 50%;
+		top: 0;
+		right: 0;
+		width: min(48vw, 46rem);
+		height: 100%;
+		background-image: radial-gradient(rgba(44, 99, 241, 0.1) 1px, transparent 1px);
+		background-size: 24px 24px;
+		mask-image: linear-gradient(to left, black, transparent 92%);
 		content: "";
 	}
 
@@ -113,100 +137,97 @@ import { withBase } from "../utils/paths";
 
 	.not-found-visual {
 		position: relative;
-		min-height: 24rem;
+		min-height: 27rem;
 	}
 
-	.not-found-number {
+	.not-found-visual::before {
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		font-family: "Manrope", sans-serif;
-		font-size: clamp(10rem, 19vw, 17rem);
-		font-weight: 800;
-		line-height: 0.75;
-		letter-spacing: -0.11em;
-		color: rgba(44, 99, 241, 0.075);
-		transform: translate(-52%, -51%);
-		white-space: nowrap;
+		inset: 10% 4% 8% 7%;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(44, 99, 241, 0.09), transparent 68%);
+		content: "";
 	}
 
 	.not-found-visual svg {
 		position: absolute;
-		inset: 2rem 0 auto;
+		inset: 50% auto auto 50%;
 		width: 100%;
+		max-width: 40rem;
 		height: auto;
 		overflow: visible;
+		transform: translate(-50%, -50%);
 	}
 
-	.route-shadow,
-	.route,
-	.route-missing {
+	.error-halo {
+		fill: rgba(255, 255, 255, 0.62);
+		stroke: rgba(44, 99, 241, 0.08);
+	}
+
+	.error-orbit {
 		fill: none;
-		stroke-linecap: round;
-		stroke-linejoin: round;
+		stroke: rgba(44, 99, 241, 0.16);
+		stroke-width: 1.5;
 	}
 
-	.route-shadow {
-		stroke: rgba(15, 27, 61, 0.09);
-		stroke-width: 16;
+	.error-orbit-outer {
+		stroke-dasharray: 3 14;
 	}
 
-	.route {
-		stroke: var(--accent);
-		stroke-width: 5;
+	.error-orbit-inner {
+		stroke-dasharray: 82 24;
 	}
 
-	.route-missing {
-		stroke: #9aabc9;
-		stroke-width: 4;
-		stroke-dasharray: 3 13;
+	.error-four {
+		fill: #0f1b3d;
+		font-family: "Manrope", sans-serif;
+		font-size: 255px;
+		font-weight: 800;
+		letter-spacing: -0.09em;
 	}
 
-	.route-start,
-	.route-node {
-		fill: #fff;
-		stroke: var(--accent);
-		stroke-width: 5;
-	}
-
-	.route-stop {
-		fill: #fff;
-		stroke: #0f1b3d;
-		stroke-width: 4;
-	}
-
-	.route-cross {
+	.error-four-shadow {
 		fill: none;
-		stroke: #0f1b3d;
+		stroke: rgba(44, 99, 241, 0.17);
 		stroke-width: 3;
+	}
+
+	.error-zero {
+		fill: url("#error-zero");
+	}
+
+	.error-zero-cutout {
+		fill: #f8faff;
+		stroke: rgba(255, 255, 255, 0.8);
+		stroke-width: 7;
+	}
+
+	.error-marker path,
+	.error-corner {
+		fill: none;
+		stroke: #ef8d75;
 		stroke-linecap: round;
+		stroke-width: 3;
 	}
 
-	.route-destination {
-		fill: #cbd6ec;
+	.error-marker-top {
+		transform: translate(158px, 72px);
 	}
 
-	.route-label {
-		position: absolute;
-		padding: 0.45rem 0.7rem;
-		border: 1px solid #e1e8f7;
-		border-radius: 0.5rem;
-		background: rgba(255, 255, 255, 0.92);
-		box-shadow: 0 8px 20px rgba(15, 27, 61, 0.07);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.02em;
-		color: #4f5f7b;
+	.error-marker-bottom {
+		transform: translate(462px, 344px);
 	}
 
-	.route-label-start {
-		bottom: 3.3rem;
-		left: 0;
+	.error-dot {
+		fill: #45bfae;
 	}
 
-	.route-label-stop {
-		right: 19%;
-		bottom: 3.8rem;
+	.error-dot-two {
+		fill: #2c63f1;
+	}
+
+	.error-corner {
+		stroke: rgba(44, 99, 241, 0.32);
+		stroke-width: 2;
 	}
 
 	@media (max-width: 900px) {
@@ -216,7 +237,7 @@ import { withBase } from "../utils/paths";
 		}
 
 		.not-found-visual {
-			min-height: 20rem;
+			min-height: 22rem;
 		}
 	}
 
@@ -236,15 +257,11 @@ import { withBase } from "../utils/paths";
 		}
 
 		.not-found-visual {
-			min-height: 15rem;
+			min-height: clamp(15rem, 65vw, 20rem);
 		}
 
 		.not-found-visual svg {
-			top: 0;
-		}
-
-		.route-label {
-			display: none;
+			width: min(100%, 34rem);
 		}
 	}
 
