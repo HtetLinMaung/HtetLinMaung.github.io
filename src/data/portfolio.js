@@ -96,6 +96,7 @@ export const mobileBankingTech = [
 	"AWS Lambda",
 	"Amazon API Gateway",
 	"Amazon RDS Proxy",
+	"AWS Secrets Manager",
 	"Amazon Aurora",
 	"Amazon SQS FIFO",
 	"Amazon SNS",
@@ -115,6 +116,20 @@ export const flightProfileOptimizerTech = [
 	"TypeScript CDK",
 	"React Native",
 	"Xamarin",
+];
+
+export const exchangeCounterTech = [
+	"Rust",
+	"Axum",
+	"Next.js",
+	"AWS Lambda",
+	"Amazon API Gateway",
+	"Amazon Cognito",
+	"Amazon Aurora PostgreSQL",
+	"Amazon RDS Proxy",
+	"AWS Secrets Manager",
+	"Amazon SQS",
+	"AWS CDK",
 ];
 
 export const featuredProjects = [
@@ -146,6 +161,16 @@ export const featuredProjects = [
 		variant: "ingest",
 		href: "/projects/rust-ingest",
 		sourceHref: "https://github.com/HtetLinMaung/rust-ingest",
+	},
+	{
+		title: "Exchange Counter",
+		tag: "Ongoing · Rust · AWS",
+		copy: "An ongoing foreign-exchange counter platform for rates, physical cash inventory, teller operations, reconciliation, and traceable financial records.",
+		tech: exchangeCounterTech,
+		techLimit: 5,
+		variant: "exchange",
+		href: "/projects/exchange-counter",
+		sourceHref: "https://github.com/HtetLinMaung/exchange-counter",
 	},
 ];
 
@@ -468,6 +493,7 @@ export const icons = {
 	bankDynamoDb: logos("aws-dynamodb"),
 	bankRdsProxy: logos("aws-rds"),
 	bankAurora: logos("aws-aurora"),
+	bankSecretsManager: logos("aws-secrets-manager"),
 	bankVpn: logos("aws-vpc"),
 	fpoAirline: mdi("airplane"),
 	bankCore: mdiLight("bank"),

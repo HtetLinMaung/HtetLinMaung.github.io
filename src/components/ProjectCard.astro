@@ -1,11 +1,12 @@
 ---
 import Icon from "./Icon.astro";
 import BankingProjectVisual from "./BankingProjectVisual.astro";
+import ExchangeCounterProjectVisual from "./ExchangeCounterProjectVisual.astro";
 import FpoProjectVisual from "./FpoProjectVisual.astro";
 import RustIngestProjectVisual from "./RustIngestProjectVisual.astro";
 import { withBase } from "../utils/paths";
 
-const { project, compact = false } = Astro.props;
+const { project, compact = false, className } = Astro.props;
 const links =
 	project.links ??
 	(project.href
@@ -21,10 +22,11 @@ const visibleTech = project.techLimit ? project.tech.slice(0, project.techLimit)
 const hiddenTechCount = project.tech.length - visibleTech.length;
 ---
 
-<article class:list={["project-card", { compact }]}>
+<article class:list={["project-card", className, { compact }]}>
 	{
 		!compact && (
 			<div class={`project-visual ${project.variant}`}>
+				{project.variant === "exchange" && <ExchangeCounterProjectVisual compact />}
 				{project.variant === "ingest" && <RustIngestProjectVisual compact />}
 				{project.variant === "banking" && <BankingProjectVisual compact />}
 				{project.variant === "flight" && <FpoProjectVisual compact />}

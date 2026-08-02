@@ -1,0 +1,269 @@
+---
+import ExchangeCounterProjectVisual from "../../components/ExchangeCounterProjectVisual.astro";
+import Icon from "../../components/Icon.astro";
+import { exchangeCounterTech } from "../../data/portfolio";
+import PortfolioLayout from "../../layouts/PortfolioLayout.astro";
+import { withBase } from "../../utils/paths";
+---
+
+<PortfolioLayout title="Htet Lin Maung | Exchange Counter" currentPath="/projects">
+	<section class="page-banner">
+		<div class="container project-detail-hero">
+			<div class="project-detail-copy">
+				<p class="eyebrow">Project Detail</p>
+				<h1>Exchange Counter</h1>
+				<p>
+					An ongoing foreign-exchange counter platform built with Rust, PostgreSQL, and AWS
+					for rates, physical cash inventory, teller operations, reconciliation, and
+					traceable financial records.
+				</p>
+
+				<div class="exchange-progress-note">
+					<span aria-hidden="true"></span>
+					<p><strong>Ongoing project.</strong> Core platform foundations are implemented and exchange operations are in development.</p>
+				</div>
+
+				<ul class="chip-list project-detail-stack">
+					{exchangeCounterTech.map((technology) => <li>{technology}</li>)}
+				</ul>
+
+				<div class="project-detail-actions">
+					<a
+						class="button primary"
+						href="https://github.com/HtetLinMaung/exchange-counter"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<Icon name="github" />
+						View Repository
+					</a>
+					<a class="button secondary" href={withBase("/projects")}>Back to Projects</a>
+				</div>
+			</div>
+
+			<ExchangeCounterProjectVisual />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="project-detail-story">
+				<div class="project-detail-story-intro">
+					<p class="eyebrow">Overview</p>
+					<h2 class="section-title">Reliable exchange operations start with accurate cash records.</h2>
+					<p>
+						A counter must apply the correct rate, track physical denominations, update
+						balances atomically, and keep a complete accounting history. The platform is
+						designed around those operational requirements rather than a simple currency
+						calculator.
+					</p>
+				</div>
+
+				<div class="project-detail-story-copy">
+					<article class="project-detail-narrative">
+						<span>01</span>
+						<h3>Current progress</h3>
+						<p>
+							Authentication, authorization, user management, PostgreSQL foundations, and AWS
+							infrastructure are implemented. Branch, currency, rate, denomination, teller
+							shift, cash inventory, and exchange transaction workflows are still in
+							development.
+						</p>
+					</article>
+
+					<article class="project-detail-narrative">
+						<span>02</span>
+						<h3>Financial data model</h3>
+						<p>
+							PostgreSQL uses strict financial types, UUID identifiers, versioned exchange
+							rates, denomination rules, cash inventory records, and ledger entries. Exchange
+							writes are designed to remain synchronous and atomic so balances and audit
+							records stay consistent.
+						</p>
+					</article>
+
+					<article class="project-detail-narrative">
+						<span>03</span>
+						<h3>Practical development workflow</h3>
+						<p>
+							The Rust API and PostgreSQL can run locally without AWS. AWS CDK provides
+							development, staging, and production settings, while RDS Proxy can be disabled
+							in development to reduce cost.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section project-detail-architecture-section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Architecture</p>
+				<h2 class="section-title">Serverless Rust APIs with a PostgreSQL financial system of record.</h2>
+				<p class="project-detail-architecture-context">
+					The diagram shows the target architecture for the ongoing project. Core financial
+					writes remain synchronous, while receipt and export jobs can run asynchronously.
+				</p>
+			</div>
+
+			<div class="project-detail-architecture">
+				<div class="project-detail-architecture-card exchange-architecture-card">
+					<a
+						class="exchange-architecture-image-link"
+						href={withBase("/projects/exchange-counter-architecture.png?v=20260802-1")}
+						target="_blank"
+						rel="noopener"
+						aria-label="Open the Exchange Counter architecture diagram at full size"
+					>
+						<img
+							class="project-detail-architecture-image exchange-architecture-image"
+							src={withBase("/projects/exchange-counter-architecture.png?v=20260802-1")}
+							width="2464"
+							height="1450"
+							loading="lazy"
+							decoding="async"
+							alt="Target architecture for the ongoing Exchange Counter project with a Next.js frontend, CloudFront, Amazon S3, API Gateway, Amazon Cognito, Rust Lambda APIs, AWS Secrets Manager, Amazon RDS Proxy, Aurora PostgreSQL Serverless v2, Amazon SQS, an asynchronous Rust worker, output storage, and AWS CDK deployment"
+						/>
+					</a>
+				</div>
+
+				<div class="project-detail-architecture-notes exchange-architecture-notes">
+					<article>
+						<span>01</span>
+						<h3>Counter channel and access</h3>
+						<p>
+							The Next.js counter application is exported to Amazon S3 and delivered through
+							Amazon CloudFront. API Gateway validates Cognito JWTs before requests reach the
+							Rust Lambda APIs. Roles cover administrators, branch managers, and tellers.
+						</p>
+					</article>
+					<article>
+						<span>02</span>
+						<h3>Separated Rust APIs</h3>
+						<p>
+							The General API handles users, branches, and rates. The independently scalable
+							Transaction API handles exchange operations, shifts, cash, and ledger writes.
+							Both use database credentials from AWS Secrets Manager and connect through RDS
+							Proxy to Aurora PostgreSQL Serverless v2.
+						</p>
+					</article>
+					<article>
+						<span>03</span>
+						<h3>Async work and deployment</h3>
+						<p>
+							Jobs are enqueued only after the PostgreSQL transaction commits. Amazon SQS
+							buffers receipt and export work for a Rust Lambda worker. AWS CDK and
+							CloudFormation deploy the environments and run controlled SQLx migrations.
+						</p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container project-detail-section">
+			<div class="section-head project-detail-head">
+				<p class="eyebrow">Engineering Focus</p>
+				<h2 class="section-title">Consistency, access control, and traceable counter operations.</h2>
+			</div>
+
+			<div class="project-detail-principles">
+				<article>
+					<h3>Atomic financial writes</h3>
+					<p>Exchange records, cash movement, balances, and ledger entries are committed together in PostgreSQL.</p>
+				</article>
+				<article>
+					<h3>Branch-level authorization</h3>
+					<p>Cognito groups and application rules restrict manager and teller access to the correct operational scope.</p>
+				</article>
+				<article>
+					<h3>Retry-safe background work</h3>
+					<p>Receipt and export jobs run after the financial commit and can be retried without changing the original transaction.</p>
+				</article>
+			</div>
+
+			<div class="project-detail-closing exchange-project-closing">
+				<div>
+					<p class="eyebrow">Ongoing Project</p>
+					<h2>The foundation is working. Exchange operations are the next active stage.</h2>
+				</div>
+				<a
+					class="button secondary"
+					href="https://github.com/HtetLinMaung/exchange-counter"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<Icon name="github" />
+					View Repository
+				</a>
+			</div>
+		</div>
+	</section>
+</PortfolioLayout>
+
+<style>
+	.exchange-progress-note {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		max-width: 38rem;
+		margin-top: 1.35rem;
+		padding: 0.9rem 1rem;
+		border: 1px solid #d9e5f4;
+		border-radius: 0.8rem;
+		background: rgba(255, 255, 255, 0.7);
+	}
+
+	.exchange-progress-note > span {
+		width: 0.58rem;
+		height: 0.58rem;
+		margin-top: 0.42rem;
+		flex: none;
+		border-radius: 50%;
+		background: #35ad98;
+		box-shadow: 0 0 0 0.3rem rgba(53, 173, 152, 0.12);
+	}
+
+	.page-banner .exchange-progress-note p {
+		margin: 0;
+		font-size: 0.84rem;
+		line-height: 1.65;
+		color: #52617a;
+	}
+
+	.exchange-progress-note strong {
+		color: #1d3152;
+	}
+
+	.exchange-architecture-card {
+		overflow: hidden;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.exchange-architecture-image-link,
+	.exchange-architecture-image {
+		display: block;
+	}
+
+	.exchange-architecture-image {
+		width: 100%;
+		height: auto;
+		border: 1px solid #dce5f6;
+		border-radius: 1.35rem;
+	}
+
+	.exchange-architecture-notes {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	@media (max-width: 720px) {
+		.exchange-architecture-notes {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

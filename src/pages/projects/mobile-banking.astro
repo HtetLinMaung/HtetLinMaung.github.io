@@ -113,19 +113,19 @@ import { withBase } from "../../utils/paths";
 				<div class="project-detail-architecture-card banking-architecture-card">
 					<a
 						class="banking-architecture-image-link"
-						href={withBase("/projects/mobile-banking-architecture.png?v=20260728-8")}
+						href={withBase("/projects/mobile-banking-architecture.png?v=20260802-4")}
 						target="_blank"
 						rel="noopener"
 						aria-label="Open the Mobile Banking architecture diagram at full size"
 					>
 						<img
 							class="project-detail-architecture-image banking-architecture-image"
-							src={withBase("/projects/mobile-banking-architecture.png?v=20260728-8")}
+							src={withBase("/projects/mobile-banking-architecture.png?v=20260802-4")}
 							width="2464"
 							height="1360"
 							loading="lazy"
 							decoding="async"
-							alt="Architecture for Flutter Mobile Banking and Angular iBanking using Amazon Cognito, Amazon API Gateway, AWS Lambda, Amazon RDS Proxy, Amazon Aurora PostgreSQL, Amazon SQS FIFO, Amazon SNS transactional SMS, Amazon DynamoDB, Amazon CloudFront, Amazon S3, and AWS Site-to-Site VPN"
+							alt="Architecture for Flutter Mobile Banking and Angular iBanking using Amazon Cognito, Amazon API Gateway, two AWS Lambda functions that read database credentials from AWS Secrets Manager, Amazon RDS Proxy, Amazon Aurora PostgreSQL, Amazon SQS FIFO, Amazon SNS transactional SMS, Amazon DynamoDB, Amazon CloudFront, Amazon S3, and AWS Site-to-Site VPN"
 						/>
 					</a>
 				</div>
@@ -148,7 +148,8 @@ import { withBase } from "../../utils/paths";
 						<p>
 							General banking endpoints and transaction-related endpoints run through separate
 							AWS Lambda functions. Both connect through Amazon RDS Proxy to Amazon Aurora
-							Serverless PostgreSQL. The General API uses a smaller Lambda configuration for
+							Serverless PostgreSQL. Both Lambda functions retrieve their database credentials
+							from AWS Secrets Manager. The General API uses a smaller Lambda configuration for
 							relational user data, limit configuration, and other application settings. The
 							transaction API uses a larger Lambda configuration for heavier transactional
 							processing. Ordered transaction events use an event-sourcing flow through Amazon SQS

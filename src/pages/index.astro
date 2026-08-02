@@ -108,8 +108,22 @@ import { withBase } from "../utils/paths";
 				<h2 class="section-title" id="featured-projects">Some things I've built</h2>
 			</div>
 
-			<div class="projects-grid">
-				{featuredProjects.map((project) => <ProjectCard project={project} />)}
+			<div class="projects-grid home-featured-projects-grid">
+				{
+					featuredProjects.map((project, index) => (
+						<ProjectCard
+							project={project}
+							className={index === featuredProjects.length - 1 ? "home-responsive-project" : undefined}
+						/>
+					))
+				}
+			</div>
+
+			<div class="home-projects-more">
+				<a class="text-link" href={withBase("/projects")}>
+					See More Projects
+					<Icon name="arrow" />
+				</a>
 			</div>
 		</div>
 	</section>
@@ -145,3 +159,39 @@ import { withBase } from "../utils/paths";
 		</div>
 	</section>
 </PortfolioLayout>
+
+<style>
+	.home-featured-projects-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.home-featured-projects-grid > :global(.home-responsive-project) {
+		display: none;
+	}
+
+	.home-projects-more {
+		display: flex;
+		justify-content: center;
+		margin-top: 2.25rem;
+	}
+
+	.home-projects-more :global(.text-link) {
+		margin-top: 0;
+	}
+
+	@media (max-width: 1120px) {
+		.home-featured-projects-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.home-featured-projects-grid > :global(.home-responsive-project) {
+			display: flex;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.home-featured-projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
