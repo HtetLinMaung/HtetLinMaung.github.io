@@ -149,7 +149,16 @@ import { withBase } from "../utils/paths";
 					aboutDetails.map((detail) => (
 						<div class="detail-item">
 							<div class="icon-wrap"><Icon name={detail.icon} /></div>
-							<p>{detail.text}</p>
+							<div class="detail-copy">
+								<p>{detail.text}</p>
+								{
+									detail.linkHref && (
+										<a class="detail-link" href={withBase(detail.linkHref)} target="_blank" rel="noreferrer">
+											{detail.linkLabel}
+										</a>
+									)
+								}
+							</div>
 						</div>
 					))
 				}

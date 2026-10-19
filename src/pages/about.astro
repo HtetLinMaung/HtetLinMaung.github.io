@@ -4,6 +4,7 @@ import AboutEngineerVisual from "../components/AboutEngineerVisual.astro";
 import StatsGrid from "../components/StatsGrid.astro";
 import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { aboutDetails, stats } from "../data/portfolio";
+import { withBase } from "../utils/paths";
 ---
 
 <PortfolioLayout title="Htet Lin Maung | About" currentPath="/about">
@@ -23,7 +24,16 @@ import { aboutDetails, stats } from "../data/portfolio";
 						aboutDetails.map((detail) => (
 							<div class="detail-item">
 								<div class="icon-wrap"><Icon name={detail.icon} /></div>
-								<p>{detail.text}</p>
+								<div class="detail-copy">
+									<p>{detail.text}</p>
+									{
+										detail.linkHref && (
+											<a class="detail-link" href={withBase(detail.linkHref)} target="_blank" rel="noreferrer">
+												{detail.linkLabel}
+											</a>
+										)
+									}
+								</div>
 							</div>
 						))
 					}

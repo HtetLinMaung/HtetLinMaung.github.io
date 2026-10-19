@@ -267,7 +267,12 @@ export const aboutDetails = [
 		text: "Chiba, Japan",
 	},
 	{ icon: "cap", text: "West Yangon Technology University\nBE in Electronic Communication" },
-	{ icon: "lang", text: "Languages\nEnglish, Burmese" },
+	{
+		icon: "lang",
+		text: "English",
+		linkLabel: "View TOEIC certificate",
+		linkHref: "/Htet-Lin-Maung-TOEIC-Certificate.pdf",
+	},
 ];
 
 export const stats = [
@@ -275,13 +280,6 @@ export const stats = [
 	{ value: "AWS", label: "Cloud Engineering" },
 	{ value: "10+", label: "Technologies" },
 	{ value: "Global", label: "Team Experience" },
-];
-
-export const aboutFocus = [
-	"Frontend interfaces that feel clear and usable",
-	"Backend systems with maintainable structure",
-	"AWS-based delivery with practical architecture",
-	"Collaboration that keeps work moving forward",
 ];
 
 export const skillGroups = [

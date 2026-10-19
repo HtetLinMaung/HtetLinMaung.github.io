@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "public" / "projects"
-SOURCE_PATH = OUTPUT_DIR / "rust-ingest-architecture.png"
+SOURCE_PATH = ROOT / "scripts" / "assets" / "rust-ingest-architecture-base.png"
 GIF_PATH = OUTPUT_DIR / "rust-ingest-architecture.gif"
 POSTER_PATH = OUTPUT_DIR / "rust-ingest-architecture-poster.png"
 

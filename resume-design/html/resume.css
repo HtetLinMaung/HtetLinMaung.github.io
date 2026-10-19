@@ -258,6 +258,19 @@ svg {
 	color: white;
 }
 
+.credential-link {
+	display: inline-block;
+	max-width: 100%;
+	margin-top: 5px;
+	color: #2f69ff;
+	font-size: 8px;
+	font-weight: 700;
+	line-height: 1.4;
+	overflow-wrap: anywhere;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
 .language-line {
 	width: 25px;
 	height: 2px;

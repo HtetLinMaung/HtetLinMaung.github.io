@@ -2080,6 +2080,21 @@ const notFoundPath = `${baseUrl.replace(/\/?$/, "/")}404`;
 				white-space: pre-line;
 			}
 
+			.detail-link {
+				display: inline-flex;
+				margin-top: 0.3rem;
+				color: var(--accent-deep);
+				font-size: 0.9rem;
+				font-weight: 750;
+				text-decoration: underline;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.22em;
+			}
+
+			.detail-link:hover {
+				color: var(--accent);
+			}
+
 			.stats-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 			}
